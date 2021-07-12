@@ -5,6 +5,9 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-global-name
+  globalName: 'mars',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Mars IT',

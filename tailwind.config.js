@@ -8,15 +8,15 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        blood: '#67000c'
-      },
       height: {
-        content: 'calc(100vh - 52px)'
+        content: 'calc(100vh - 80px)'
       },
-      inset: {
-        header: '52px'
-      }
+      boxShadow: {
+        'b-2': '0 2px white'
+      },
+      backgroundImage: (theme) => ({
+        contact: 'url("/background/contact.jpg")'
+      })
     }
   },
   mode: 'jit'

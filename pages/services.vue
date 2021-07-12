@@ -2,14 +2,6 @@
   <div
     class="text-5xl font-serif w-full h-content flex items-center justify-center bg-purple-900 text-white text-center"
   >
-    Coming Soon
+    Services
   </div>
 </template>
-
-<script lang="ts">
-  import Vue from 'vue'
-
-  export default Vue.extend({
-    name: 'Homepage'
-  })
-</script>

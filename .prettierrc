@@ -2,7 +2,7 @@
   "semi": false,
   "useTabs": false,
   "singleQuote": true,
-  "arrowParens": "avoid",
+  "arrowParens": "always",
   "trailingComma": "none",
   "vueIndentScriptAndStyle": true
 }
