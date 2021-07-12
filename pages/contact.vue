@@ -15,7 +15,7 @@
         <br />
         Fill the form below &amp;
         <br />
-        We will mobile you soon
+        We will contact you soon
       </div>
 
       <hr class="my-5" />

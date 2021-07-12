@@ -39,7 +39,7 @@
 
     <div
       v-if="menu"
-      class="flex flex-col md:hidden text-gray-400 font-medium transition-all top-20 bg-gray-900"
+      class="flex flex-col md:hidden text-gray-400 font-medium transition-all top-20 bg-gray-900 sticky"
       @click="menu = false"
     >
       <NuxtLink
