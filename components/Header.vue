@@ -1,6 +1,8 @@
 <template>
-  <header class="bg-gray-900 h-20">
-    <div class="flex gap-5 items-center justify-between py-3 px-5 h-full">
+  <header class="bg-gray-900 h-20 flex justify-center">
+    <div
+      class="container flex gap-5 items-center justify-between py-3 px-5 h-full"
+    >
       <img
         width="30"
         height="30"
@@ -12,7 +14,7 @@
       />
 
       <NuxtLink class="flex items-center md:pr-10" to="/">
-        <img src="https://picsum.photos/120/50" alt="Mars IT Logo" />
+        <img class="h-14" src="/logo.png" alt="Mars IT Logo" />
       </NuxtLink>
 
       <div class="flex-grow items-center text-gray-400 flex text-lg">
@@ -26,20 +28,11 @@
           {{ route.text }}
         </NuxtLink>
       </div>
-
-      <NuxtLink to="/contact" class="hidden sm:block">
-        <button
-          class="rounded-full bg-gray-800 text-white font-semibold md:text-lg px-6 py-3 hover:bg-yellow-300 hover:text-gray-800 transition-all"
-          @click="menu = false"
-        >
-          Contact Us
-        </button>
-      </NuxtLink>
     </div>
 
     <div
       v-if="menu"
-      class="flex flex-col md:hidden text-gray-400 font-medium transition-all top-20 bg-gray-900 sticky"
+      class="flex flex-col md:hidden text-gray-400 font-medium transition-all top-20 bg-gray-900 sticky z-10"
       @click="menu = false"
     >
       <NuxtLink
@@ -50,13 +43,6 @@
         exact-active-class="font-bold text-white bg-gray-800 hover:text-white"
       >
         {{ route.text }}
-      </NuxtLink>
-      <NuxtLink
-        to="/contact"
-        class="py-4 px-5 hover:bg-gray-700 hover:text-gray-200 transition-all sm:hidden"
-        exact-active-class="font-bold text-white bg-gray-800 hover:text-white"
-      >
-        Contact Us
       </NuxtLink>
     </div>
   </header>
@@ -75,7 +61,8 @@
 
         routes: [
           { path: '/services', text: 'Services' },
-          { path: '/about', text: 'About Us' }
+          { path: '/about', text: 'About Us' },
+          { path: '/contact', text: 'Contact Us' }
         ]
       }
     },

@@ -11,3 +11,26 @@
 .font-serif {
   font-family: 'Bona Nova' !important;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2.5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
+}
+
+.justify-end {
+  // @todo: Remove
+  justify-content: flex-end;
+}

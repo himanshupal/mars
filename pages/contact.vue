@@ -1,9 +1,11 @@
 <template>
-  <div class="w-full h-content flex bg-contact bg-cover">
-    <div class="hidden sm:block w-1/2 md:w-3/5" />
+  <div
+    class="w-full h-content flex bg-contact bg-cover"
+    :class="[`justify-${formDirection}`]"
+  >
     <form
       @submit.prevent="submitForm"
-      class="px-8 flex-grow overflow-auto bg-gray-800 bg-opacity-95 text-white"
+      class="px-8 overflow-auto bg-gray-800 bg-opacity-50 text-white lg:w-2/5"
     >
       <div class="text-center text-xl pt-5">
         You may always reach us at
@@ -115,6 +117,12 @@
           location: this.location,
           subject: this.subject
         })
+      }
+    },
+
+    computed: {
+      formDirection(): string {
+        return (this.$route.query['justify'] as string) || 'center'
       }
     }
   })
