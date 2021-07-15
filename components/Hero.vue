@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex flex-col sm:flex-row items-center justify-between max-w-full py-14"
+    class="flex flex-col md:flex-row items-center justify-between max-w-full min-h-screen"
   >
     <div
-      class="flex flex-col gap-10 h-full justify-evenly px-10 pb-14 sm:pb-0 sm:px-14 lg:px-20 max-w-3xl text-center sm:text-left items-center sm:items-start"
+      class="flex flex-col gap-10 h-full justify-evenly px-10 pb-14 sm:pb-0 sm:pl-14 lg:pl-20 text-center md:text-left items-center md:items-start w-3/5"
     >
       <div class="text-5xl md:text-6xl lg:text-7xl leading-snug">
         We Provide Best IT Services
@@ -19,11 +19,13 @@
         EXPLORE
       </button>
     </div>
-    <img
-      class="max-h-96 object-contain"
-      src="@/assets/images/hero.svg"
-      alt="Hero"
-    />
+    <div class="flex items-center w-2/5">
+      <img
+        class="max-h-96 object-contain"
+        src="@/assets/images/hero.svg"
+        alt="Hero"
+      />
+    </div>
   </div>
 </template>
 
