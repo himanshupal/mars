@@ -5,23 +5,8 @@
   >
     <form
       @submit.prevent="submitForm"
-      class="px-8 overflow-auto bg-gray-800 bg-opacity-50 text-white lg:w-2/5"
+      class="px-8 overflow-auto bg-gray-800 bg-opacity-25 text-white lg:w-2/5 flex flex-col justify-center"
     >
-      <div class="text-center text-xl pt-5">
-        You may always reach us at
-        <a :href="`mailto:${siteMail}`" class="outline-none font-semibold">
-          {{ siteMail }}
-        </a>
-        <br />
-        OR
-        <br />
-        Fill the form below &amp;
-        <br />
-        We will contact you soon
-      </div>
-
-      <hr class="my-5" />
-
       <label class="block py-2" for="name">
         Your Name
       </label>
@@ -81,10 +66,17 @@
 
       <button
         type="submit"
-        class="mt-7 mb-5 py-3 px-6 border-2 rounded-full w-full hover:bg-white hover:text-gray-800 hover:font-semibold transition-all text-lg"
+        class="mt-7 mb-5 py-1.5 px-6 border-2 rounded-sm w-full hover:bg-white hover:text-gray-800 transition-all text-lg focus-within:bg-white focus-within:text-gray-800 font-semibold"
       >
         Submit
       </button>
+
+      <div class="text-center text-sm">
+        or you may contact us at
+        <a :href="`mailto:${siteMail}`" class="outline-none font-semibold">
+          {{ siteMail }}
+        </a>
+      </div>
     </form>
   </div>
 </template>

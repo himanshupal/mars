@@ -1,7 +1,7 @@
 <template>
-  <header class="bg-gray-900 h-20 flex justify-center">
+  <header class="bg-gray-900 h-20 flex">
     <div
-      class="container flex gap-5 items-center justify-between py-3 px-5 h-full"
+      class="flex gap-5 items-center justify-between py-3 px-10 lg:px-24 h-full"
     >
       <img
         width="30"
@@ -9,7 +9,7 @@
         tabindex="0"
         src="@/assets/icons/menu.svg"
         alt="Menu Icon"
-        class="cursor-pointer md:hidden"
+        class="cursor-pointer lg:hidden"
         @click="menu = !menu"
       />
 
@@ -22,7 +22,7 @@
           v-for="(route, index) in routes"
           :key="`navbar-link-${index}`"
           :to="route.path"
-          class="mx-5 hover:shadow-b-2 hover:text-gray-200 transition-shadow hidden md:block"
+          class="mx-5 hover:shadow-b-2 hover:text-gray-200 transition-shadow hidden lg:block"
           exact-active-class="font-bold text-white hover:text-white hover:shadow-none"
         >
           {{ route.text }}
@@ -32,7 +32,7 @@
 
     <div
       v-if="menu"
-      class="flex flex-col md:hidden text-gray-400 font-medium transition-all top-20 bg-gray-900 sticky z-10"
+      class="flex flex-col lg:hidden text-gray-400 font-medium transition-all top-20 bg-gray-900 absolute w-full z-10"
       @click="menu = false"
     >
       <NuxtLink
@@ -60,7 +60,10 @@
         menu: false,
 
         routes: [
+          { path: '/', text: 'Home' },
           { path: '/services', text: 'Services' },
+          { path: '/training', text: 'Training' },
+          { path: '/careers', text: 'Careers' },
           { path: '/about', text: 'About Us' },
           { path: '/contact', text: 'Contact Us' }
         ]
