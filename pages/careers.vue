@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="text-5xl font-serif w-full h-content flex items-center justify-center bg-gray-900 text-white text-center"
-  >
-    Careers
+  <div class="w-full h-content flex bg-gray-900 text-white py-10">
+    <Careers />
   </div>
 </template>

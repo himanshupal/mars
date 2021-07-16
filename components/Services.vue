@@ -12,7 +12,12 @@
         <div
           class="rounded-full flex items-center justify-center shadow-lg p-6"
         >
-          <img width="56" src="@/assets/icons/shield.svg" alt="icon-shield" />
+          <img
+            loading="lazy"
+            width="56"
+            src="@/assets/icons/shield.svg"
+            alt="icon-shield"
+          />
         </div>
         <div class="text-2xl font-bold text-black text-center pt-4 pb-1">
           Managed IT Services
@@ -28,7 +33,12 @@
         <div
           class="rounded-full flex items-center justify-center shadow-lg p-6"
         >
-          <img width="56" src="@/assets/icons/web.svg" alt="icon-web" />
+          <img
+            loading="lazy"
+            width="56"
+            src="@/assets/icons/web.svg"
+            alt="icon-web"
+          />
         </div>
         <div class="text-2xl font-bold text-black text-center pt-4 pb-1">
           Backup &amp; Recovery
@@ -44,7 +54,12 @@
         <div
           class="rounded-full flex items-center justify-center shadow-lg p-6"
         >
-          <img width="56" src="@/assets/icons/server.svg" alt="icon-server" />
+          <img
+            loading="lazy"
+            width="56"
+            src="@/assets/icons/server.svg"
+            alt="icon-server"
+          />
         </div>
         <div class="text-2xl font-bold text-black text-center pt-4 pb-1">
           Cyber Security
@@ -58,6 +73,7 @@
 
     <div class="flex items-center justify-center">
       <img
+        loading="lazy"
         class="h-96"
         src="@/assets/images/web-design.svg"
         alt="Web Design Image"
@@ -76,7 +92,12 @@
         <div
           class="rounded-full flex items-center justify-center shadow-lg p-6"
         >
-          <img width="56" src="@/assets/icons/shield.svg" alt="icon-shield" />
+          <img
+            loading="lazy"
+            width="56"
+            src="@/assets/icons/shield.svg"
+            alt="icon-shield"
+          />
         </div>
         <div class="text-2xl font-bold text-black text-center pt-4 pb-1">
           Education &amp; Health
@@ -92,7 +113,12 @@
         <div
           class="rounded-full flex items-center justify-center shadow-lg p-6"
         >
-          <img width="56" src="@/assets/icons/web.svg" alt="icon-web" />
+          <img
+            loading="lazy"
+            width="56"
+            src="@/assets/icons/web.svg"
+            alt="icon-web"
+          />
         </div>
         <div class="text-2xl font-bold text-black text-center pt-4 pb-1">
           Retail &amp; Commerce
@@ -108,7 +134,12 @@
         <div
           class="rounded-full flex items-center justify-center shadow-lg p-6"
         >
-          <img width="56" src="@/assets/icons/server.svg" alt="icon-server" />
+          <img
+            loading="lazy"
+            width="56"
+            src="@/assets/icons/server.svg"
+            alt="icon-server"
+          />
         </div>
         <div class="text-2xl font-bold text-black text-center pt-4 pb-1">
           Travel &amp; Services

@@ -21,6 +21,7 @@
     </div>
     <div class="flex items-center w-2/5">
       <img
+        loading="lazy"
         class="max-h-96 object-contain"
         src="@/assets/images/hero.svg"
         alt="Hero"

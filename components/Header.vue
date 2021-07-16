@@ -4,6 +4,7 @@
       class="flex gap-5 items-center justify-between py-3 px-10 lg:px-24 h-full"
     >
       <img
+        loading="lazy"
         width="30"
         height="30"
         tabindex="0"
@@ -14,7 +15,7 @@
       />
 
       <NuxtLink class="flex items-center md:pr-10" to="/">
-        <img class="h-14" src="/logo.png" alt="Mars IT Logo" />
+        <img loading="lazy" class="h-14" src="/logo.png" alt="Mars IT Logo" />
       </NuxtLink>
 
       <div class="flex-grow items-center text-gray-400 flex text-lg">
