@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col gap-6 py-10 items-center">
+  <div class="flex flex-col text-center gap-6 py-10">
     <div class="text-4xl">Our Portfolio</div>
-    <div class="text-sm font-light px-4 max-w-sm text-center">
+    <div class="text-sm font-light px-4 max-w-sm mx-auto">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
       repudiandae dolorem perspiciatis assumenda perferendis deserunt.
     </div>

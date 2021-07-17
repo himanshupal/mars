@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col gap-6 text-center py-10 items-center">
+  <div class="flex flex-col gap-6 text-center py-10">
     <div class="text-4xl">Why choose us?</div>
-    <div class="text-sm font-light px-4 max-w-sm">
+    <div class="text-sm font-light px-4 max-w-sm mx-auto">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
       repudiandae dolorem perspiciatis assumenda perferendis deserunt.
     </div>
