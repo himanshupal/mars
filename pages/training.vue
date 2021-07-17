@@ -16,7 +16,12 @@
           <div class="text-2xl pb-6">{{ sector }} trainings we offer</div>
           <Flicking
             class="w-full h-48"
-            :options="{ align: 'prev', bound: true, renderOnlyVisible: true }"
+            :options="{
+              align: 'prev',
+              bound: true,
+              renderOnlyVisible: true,
+              moveType: 'freeScroll'
+            }"
           >
             <div
               v-for="(course, index) in training"

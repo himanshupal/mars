@@ -21,11 +21,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '@/assets/css/main',
-    '@egjs/vue-flicking/dist/flicking.css',
-    '@egjs/flicking-plugins/dist/flicking-plugins.css'
-  ],
+  css: ['@/assets/css/main'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [{ src: '@/plugins/Flicking', mode: 'client' }],
