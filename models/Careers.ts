@@ -1,10 +1,8 @@
-interface Form {
-  name: string
-  email: string
-  contact: string
-  location: string
-  position: string
-  experience: number
+import { ContactData } from './Contact'
+
+export interface Form extends ContactData {
+  position?: string
+  experience?: number | string
   message: string
 }
 

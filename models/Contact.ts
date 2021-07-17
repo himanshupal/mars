@@ -1,9 +1,9 @@
 export interface ContactData {
-  siteMail: string
+  siteMail?: string
 
   name: string
   email: string
   mobile: string
   location: string
-  subject: string
+  subject?: string
 }

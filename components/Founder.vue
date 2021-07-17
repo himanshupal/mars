@@ -6,11 +6,11 @@
         class="text-white px-10 lg:px-24 font-semibold rounded-xl pb-4 flex flex-col md:flex-row items-center md:items-start lg:items-end"
       >
         <div
-          class="rounded-br-3xl rounded-tr-xl flex items-center justify-center shadow-lg p-6 md:pl-0 mr-4 flex-grow w-4/5 sm:w-2/3 md:w-1/3"
+          class="rounded-br-3xl rounded-tr-xl rounded-bl-xl rounded-tl-3xl md:rounded-bl-none md:rounded-tl-none flex items-center justify-center shadow-lg p-6 md:pl-0 mr-4 flex-grow w-4/5 sm:w-2/3 md:w-1/3"
         >
           <img
             loading="lazy"
-            class="rounded-br-2xl rounded-tr-xl object-cover"
+            class="rounded-br-2xl rounded-tr-xl rounded-bl-xl rounded-tl-2xl md:rounded-bl-none md:rounded-tl-none object-cover"
             :src="require(`@/assets/images/${members[0].avatar}`)"
             :alt="`${members[0].name}`"
           />

@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="w-full h-content flex bg-contact bg-cover"
-    :class="[`justify-${formDirection}`]"
-  >
+  <div class="w-full h-content justify-center flex bg-contact bg-cover">
     <form
       @submit.prevent="submitForm"
       class="px-8 overflow-auto bg-gray-800 bg-opacity-25 text-white lg:w-2/5 flex flex-col justify-center"
@@ -109,12 +106,6 @@
           location: this.location,
           subject: this.subject
         })
-      }
-    },
-
-    computed: {
-      formDirection(): string {
-        return (this.$route.query['justify'] as string) || 'center'
       }
     }
   })

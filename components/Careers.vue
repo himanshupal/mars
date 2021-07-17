@@ -117,9 +117,9 @@
             v-model="form.position"
           />
 
-          <label class="block py-2" for="experience"
-            >Experience <span class="text-xs">(in months)</span></label
-          >
+          <label class="block py-2" for="experience">
+            Experience <span class="text-xs">(in months)</span>
+          </label>
           <input
             class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
             type="number"
@@ -167,7 +167,7 @@
         form: {
           name: '',
           email: '',
-          contact: '',
+          mobile: '',
           location: '',
           position: '',
           experience: 0,
