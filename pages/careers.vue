@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-content flex bg-gray-900 text-white py-10">
+  <div class="w-full h-content bg-gray-900 text-white overflow-auto">
     <Careers />
   </div>
 </template>

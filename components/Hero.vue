@@ -14,7 +14,7 @@
       </div>
       <button
         @click="next"
-        class="py-3 px-6 rounded-full border-2 bg-white hover:bg-yellow-600 text-gray-900 font-bold text-lg w-48 transition-colors"
+        class="py-3 px-6 rounded-full border-2 bg-white hover:bg-yellow-600 hover:text-white text-gray-900 font-bold text-lg w-48 transition-colors"
       >
         EXPLORE
       </button>
