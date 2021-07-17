@@ -3,5 +3,6 @@ export interface Members {
     name: string
     designation: string
     avatar: string
+    message?: string
   }>
 }

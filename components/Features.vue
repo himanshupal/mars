@@ -5,24 +5,23 @@
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
       repudiandae dolorem perspiciatis assumenda perferendis deserunt.
     </div>
-    <div
-      class="flex flex-wrap gap-10 items-center justify-evenly pt-5 w-full px-10"
-    >
+    <div class="flex gap-10 justify-evenly pt-5 flex-wrap px-10">
       <div
-        class="bg-green-600 text-white font-semibold rounded-xl p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl"
+        class="bg-gradient-to-br from-red-500 to-pink-700 via-purple-500 hover:from-pink-700 hover:to-red-600 text-white font-semibold p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl transform hover:-translate-y-4 hover:scale-105 transition-all duration-500"
       >
         <div
-          class="rounded-full flex items-center justify-center shadow-lg p-6"
+          class="bg-white flex items-center justify-center shadow-lg p-6 transform -skew-y-6 -skew-x-6"
         >
           <img
             loading="lazy"
             width="56"
-            src="@/assets/icons/web.svg"
-            alt="icon-web"
+            class="transform skew-y-6 skew-x-6"
+            src="@/assets/icons/shield.svg"
+            alt="icon-shield"
           />
         </div>
         <div class="text-2xl font-bold text-center pt-4 pb-1">
-          Expert Technicians
+          Great Support
         </div>
         <div class="text-sm text-center">
           Mars brings the power of artificial intelligence &amp; data science to
@@ -30,16 +29,17 @@
         </div>
       </div>
       <div
-        class="bg-green-600 text-white font-semibold rounded-xl p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl"
+        class="bg-gradient-to-br from-red-500 to-pink-700 via-purple-500 hover:from-pink-700 hover:to-red-600 text-white font-semibold p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl transform hover:-translate-y-4 hover:scale-105 transition-all duration-500"
       >
         <div
-          class="rounded-full flex items-center justify-center shadow-lg p-6"
+          class="bg-white flex items-center justify-center shadow-lg p-6 transform -skew-y-6 -skew-x-6"
         >
           <img
             loading="lazy"
             width="56"
+            class="transform skew-y-6 skew-x-6"
             src="@/assets/icons/web.svg"
-            alt="icon-web"
+            alt="icon-shield"
           />
         </div>
         <div class="text-2xl font-bold text-center pt-4 pb-1">
@@ -51,20 +51,21 @@
         </div>
       </div>
       <div
-        class="bg-green-600 text-white font-semibold rounded-xl p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl"
+        class="bg-gradient-to-br from-red-500 to-pink-700 via-purple-500 hover:from-pink-700 hover:to-red-600 text-white font-semibold p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl transform hover:-translate-y-4 hover:scale-105 transition-all duration-500"
       >
         <div
-          class="rounded-full flex items-center justify-center shadow-lg p-6"
+          class="bg-white flex items-center justify-center shadow-lg p-6 transform -skew-y-6 -skew-x-6"
         >
           <img
             loading="lazy"
             width="56"
-            src="@/assets/icons/web.svg"
-            alt="icon-web"
+            class="transform skew-y-6 skew-x-6"
+            src="@/assets/icons/server.svg"
+            alt="icon-shield"
           />
         </div>
         <div class="text-2xl font-bold text-center pt-4 pb-1">
-          Great Support
+          Expert Technicians
         </div>
         <div class="text-sm text-center">
           Mars brings the power of artificial intelligence &amp; data science to

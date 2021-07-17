@@ -18,7 +18,8 @@
       accusamus? Molestiae doloremque vero, dignissimos beatae odio optio amet.
     </div>
     <Features />
-    <Members />
+    <!-- <Members /> -->
+    <Founder />
     <Portfolio />
   </div>
 </template>

@@ -87,19 +87,20 @@
     </div>
     <div class="flex gap-10 justify-evenly pt-5 flex-wrap px-10">
       <div
-        class="bg-white text-gray-900 font-semibold rounded-xl p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl"
+        class="bg-gradient-to-br from-red-500 to-pink-700 via-purple-500 hover:from-pink-700 hover:to-red-600 text-white font-semibold p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl transform hover:-translate-y-4 hover:scale-105 transition-all duration-500"
       >
         <div
-          class="rounded-full flex items-center justify-center shadow-lg p-6"
+          class="bg-white flex items-center justify-center shadow-lg p-6 transform -skew-y-6 -skew-x-6"
         >
           <img
             loading="lazy"
             width="56"
+            class="transform skew-y-6 skew-x-6"
             src="@/assets/icons/shield.svg"
             alt="icon-shield"
           />
         </div>
-        <div class="text-2xl font-bold text-black text-center pt-4 pb-1">
+        <div class="text-2xl font-bold text-center pt-4 pb-1">
           Education &amp; Health
         </div>
         <div class="text-sm text-center">
@@ -108,19 +109,20 @@
         </div>
       </div>
       <div
-        class="bg-white text-gray-900 font-semibold rounded-xl p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl"
+        class="bg-gradient-to-br from-red-500 to-pink-700 via-purple-500 hover:from-pink-700 hover:to-red-600 text-white font-semibold p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl transform hover:-translate-y-4 hover:scale-105 transition-all duration-500"
       >
         <div
-          class="rounded-full flex items-center justify-center shadow-lg p-6"
+          class="bg-white flex items-center justify-center shadow-lg p-6 transform -skew-y-6 -skew-x-6"
         >
           <img
             loading="lazy"
             width="56"
+            class="transform skew-y-6 skew-x-6"
             src="@/assets/icons/web.svg"
-            alt="icon-web"
+            alt="icon-shield"
           />
         </div>
-        <div class="text-2xl font-bold text-black text-center pt-4 pb-1">
+        <div class="text-2xl font-bold text-center pt-4 pb-1">
           Retail &amp; Commerce
         </div>
         <div class="text-sm text-center">
@@ -129,20 +131,21 @@
         </div>
       </div>
       <div
-        class="bg-white text-gray-900 font-semibold rounded-xl p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl"
+        class="bg-gradient-to-br from-red-500 to-pink-700 via-purple-500 hover:from-pink-700 hover:to-red-600 text-white font-semibold p-6 pb-4 w-72 h-72 flex flex-col items-center justify-between shadow-2xl transform hover:-translate-y-4 hover:scale-105 transition-all duration-500"
       >
         <div
-          class="rounded-full flex items-center justify-center shadow-lg p-6"
+          class="bg-white flex items-center justify-center shadow-lg p-6 transform -skew-y-6 -skew-x-6"
         >
           <img
             loading="lazy"
             width="56"
+            class="transform skew-y-6 skew-x-6"
             src="@/assets/icons/server.svg"
-            alt="icon-server"
+            alt="icon-shield"
           />
         </div>
-        <div class="text-2xl font-bold text-black text-center pt-4 pb-1">
-          Travel &amp; Services
+        <div class="text-2xl font-bold text-center pt-4 pb-1">
+          Training Services
         </div>
         <div class="text-sm text-center">
           Mars brings the power of artificial intelligence &amp; data science to

@@ -33,7 +33,6 @@
 </template>
 
 <script lang="ts">
-  import { FlickingOptions } from '@egjs/flicking'
   import Vue from 'vue'
   import { Members } from '~/models/Members'
 
