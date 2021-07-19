@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-6 py-10">
-    <div class="text-5xl pt-5 px-10 lg:px-24 font-bold">Founder's Message</div>
+    <div class="text-5xl pt-5 px-10 lg:px-24 font-bold">CEO Speaks</div>
     <div class="flex flex-wrap">
       <div
         class="text-white px-10 lg:px-24 font-semibold rounded-xl pb-4 flex flex-col md:flex-row items-center md:items-start lg:items-end"
@@ -20,7 +20,7 @@
             {{ members[0].message }}
           </div>
 
-          <div class="text-lg">
+          <div class="text-xl">
             {{ members[0].name }}
           </div>
 

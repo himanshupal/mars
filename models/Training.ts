@@ -1,17 +1,10 @@
 import { Form } from './Careers'
 
-interface Courses {
-  title: string
-  duration?: string
-  description: string
-  cost?: number
-}
-
 export interface TrainingForm extends Form {
   course: string
   semester: string
   college: string
-  enquiryAbout: string
+  enquiryFor: string
 }
 
 export interface Training {
@@ -19,9 +12,12 @@ export interface Training {
     title: string
     image: string
   }>
-  trainings: {
-    IT: Array<Courses>
-    'NON-IT'?: Array<Courses>
-  }
+  trainings: Array<{
+    title: string
+    duration?: string
+    description: string
+    cost?: number
+  }>
   form: TrainingForm
+  trainingSelected: boolean
 }
