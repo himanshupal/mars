@@ -1,6 +1,6 @@
 <template>
   <main>
     <Header />
-    <Nuxt />
+    <Nuxt class="w-full min-h-screen pt-20" />
   </main>
 </template>

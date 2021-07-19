@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-content bg-gray-900 text-white overflow-auto">
+  <div class="bg-gray-900 text-white">
     <Carousel :slides="slides" />
     <div class="text-4xl my-16 sm:my-24 px-10 lg:px-20 font-semibold">
       We provide online &amp; offline trainings for various IT &amp; non IT
@@ -48,88 +48,88 @@
             Your Name
           </label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="name"
             required
             ref="form"
             placeholder="John Doe"
-            v-model="form.name"
+            v-model.trim="form.name"
           />
 
           <label class="block py-2" for="email">
             E-Mail Address
           </label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="email"
             name="email"
             required
             placeholder="johndoe@email.com"
-            v-model="form.email"
+            v-model.trim="form.email"
           />
 
           <label class="block py-2" for="mobile">
             Mobile Number
           </label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="mobile"
             required
             placeholder="+XX-XXX-XXX-XXXX"
-            v-model="form.mobile"
+            v-model.trim="form.mobile"
           />
 
           <label class="block py-2" for="city">Location</label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="city"
             required
             placeholder="Where are you from ?"
-            v-model="form.location"
+            v-model.trim="form.location"
           />
 
           <label class="block py-2" for="course">Course</label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="course"
             required
             placeholder="Your college course and joining year"
-            v-model="form.course"
+            v-model.trim="form.course"
           />
 
           <label class="block py-2" for="semester">Semester</label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="semester"
             required
             placeholder="Your current and remaining semesters"
-            v-model="form.semester"
+            v-model.trim="form.semester"
           />
 
           <label class="block py-2" for="college">College</label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="college"
             required
             placeholder="College name"
-            v-model="form.location"
+            v-model.trim="form.location"
           />
 
           <label class="block py-2" for="enquiry">Enquiring for</label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="enquiry"
             required
             :disabled="trainingSelected"
             placeholder="What do you want to learn about ?"
-            v-model="form.enquiryFor"
+            v-model.trim="form.enquiryFor"
           />
 
           <label class="block py-2" for="subject">
@@ -140,7 +140,7 @@
             name="message"
             rows="3"
             placeholder="Have any query or message for us..."
-            v-model="form.message"
+            v-model.trim="form.message"
           />
 
           <button

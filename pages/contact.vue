@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-content justify-center flex bg-contact bg-cover">
+  <div class="justify-center flex bg-contact bg-cover">
     <form
       @submit.prevent="submitForm"
       class="px-8 overflow-auto bg-gray-800 bg-opacity-25 text-white lg:w-2/5 flex flex-col justify-center"
@@ -8,46 +8,46 @@
         Your Name
       </label>
       <input
-        class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+        class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
         type="text"
         name="name"
         required
         placeholder="John Doe"
-        v-model="name"
+        v-model.trim="name"
       />
 
       <label class="block py-2" for="email">
         E-Mail Address
       </label>
       <input
-        class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+        class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
         type="email"
         name="email"
         required
         placeholder="johndoe@email.com"
-        v-model="email"
+        v-model.trim="email"
       />
 
       <label class="block py-2" for="mobile">
         Mobile Number
       </label>
       <input
-        class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+        class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
         type="text"
         name="mobile"
         required
         placeholder="+XX-XXX-XXX-XXXX"
-        v-model="mobile"
+        v-model.trim="mobile"
       />
 
       <label class="block py-2" for="city">Location</label>
       <input
-        class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+        class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
         type="text"
         name="city"
         required
         placeholder="New Delhi, India"
-        v-model="location"
+        v-model.trim="location"
       />
 
       <label class="block py-2" for="subject">
@@ -58,7 +58,7 @@
         name="subject"
         rows="3"
         placeholder="Write your query in detail here..."
-        v-model="subject"
+        v-model.trim="subject"
       />
 
       <button

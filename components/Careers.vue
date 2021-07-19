@@ -64,70 +64,70 @@
           </label>
           <input
             ref="form"
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="name"
             required
             placeholder="John Doe"
-            v-model="form.name"
+            v-model.trim="form.name"
           />
 
           <label class="block py-2" for="email">
             E-Mail Address
           </label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="email"
             name="email"
             required
             placeholder="johndoe@email.com"
-            v-model="form.email"
+            v-model.trim="form.email"
           />
 
           <label class="block py-2" for="mobile">
             Mobile Number
           </label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="mobile"
             required
             placeholder="+XX-XXX-XXX-XXXX"
-            v-model="form.mobile"
+            v-model.trim="form.mobile"
           />
 
           <label class="block py-2" for="city">Location</label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="city"
             required
             placeholder="Where are you from ?"
-            v-model="form.location"
+            v-model.trim="form.location"
           />
 
           <label class="block py-2" for="position">Applying for</label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="position"
             required
             :disabled="jobSelected"
             placeholder="Human Resources"
-            v-model="form.position"
+            v-model.trim="form.position"
           />
 
           <label class="block py-2" for="experience">
             Experience <span class="text-xs">(in months)</span>
           </label>
           <input
-            class="order-r-8 w-full h-9 px-3 rounded-sm text-gray-900"
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="number"
             name="experience"
             required
             min="0"
             max="960"
-            v-model="form.experience"
+            v-model.trim="form.experience"
           />
 
           <label class="block py-2" for="message">
@@ -138,7 +138,7 @@
             name="message"
             rows="3"
             placeholder="Any message for the recruiter..."
-            v-model="form.message"
+            v-model.trim="form.message"
           />
 
           <button

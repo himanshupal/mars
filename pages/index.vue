@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-content bg-gray-900 text-white overflow-auto">
+  <div class="bg-gray-900 text-white">
     <Hero />
     <Services />
     <Features />

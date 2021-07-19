@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-gray-900 h-20 flex">
+  <header class="bg-gray-900 h-20 w-full flex fixed top-0 z-50">
     <div
       class="flex gap-5 items-center justify-between py-3 px-10 lg:pl-24 h-full w-full"
     >
@@ -18,7 +18,9 @@
         <img loading="lazy" class="h-14" src="/logo.png" alt="Mars IT Logo" />
       </NuxtLink>
 
-      <div class="flex-grow items-center justify-end text-gray-400 flex text-lg">
+      <div
+        class="flex-grow items-center justify-end text-gray-400 flex text-lg"
+      >
         <NuxtLink
           v-for="(route, index) in routes"
           :key="`navbar-link-${index}`"

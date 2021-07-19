@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="w-full h-content flex flex-col bg-gray-900 text-white py-10 overflow-auto"
-  >
+  <div class="flex flex-col bg-gray-900 text-white py-10">
     <div class="text-5xl pt-5 px-10 lg:px-24 font-bold">About Us</div>
     <div class="py-5 px-10 lg:px-24 text-sm font-light text-justify sm:w-4/5">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad minus iusto
