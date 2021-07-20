@@ -43,12 +43,12 @@
       <div v-else>
         We are sorry to inform you but currently there are no jobs available.
         <br />
-        You may however still apply &amp; we contact you in future if found a
-        suitable job matching your description.
+        However you can still apply &amp; we will contact you if found a
+        suitable job matching your description in future.
       </div>
       <div
         :class="[
-          'flex flex-col gap-4 md:w-2/5 pl-0 pt-10',
+          'flex flex-col gap-4 sm:w-3/5 md:w-2/5 pl-0 pt-10',
           { 'md:pt-0 md:pl-6': jobs.length }
         ]"
       >

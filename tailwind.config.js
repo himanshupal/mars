@@ -15,7 +15,8 @@ module.exports = {
         'b-2': '0 2px white'
       },
       backgroundImage: (theme) => ({
-        contact: 'url("/background/contact.jpg")'
+        contact: 'url("/background/contact.jpg")',
+        world: 'url("/background/world.svg")'
       })
     }
   }
