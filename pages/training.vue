@@ -35,6 +35,13 @@
           </div>
         </div>
       </div>
+
+      <Testimonials
+        class="lg:hidden"
+        :title="'Student Testimonials'"
+        :slides="testimonials"
+      />
+
       <div class="flex flex-col w-full sm:w-2/3 lg:w-1/3">
         <div class="text-2xl pb-4">
           Fill in the form below &amp; we will contact you soon
@@ -90,25 +97,41 @@
             v-model.trim="form.location"
           />
 
-          <label class="block py-2" for="course">Course</label>
+          <label class="block py-2" for="course">Course &amp; Semester</label>
           <input
             class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="course"
             required
-            placeholder="Your college course and joining year"
+            placeholder="Your course &amp; semester"
             v-model.trim="form.course"
           />
 
-          <label class="block py-2" for="semester">Semester</label>
-          <input
+          <label class="block py-2" for="medium">
+            Preffered Medium
+          </label>
+          <select
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
+            required
+            type="text"
+            name="medium"
+            v-model.trim="form.medium"
+          >
+            <option hidden value="-1">
+              Select training type
+            </option>
+            <option value="Online">Online</option>
+            <option value="Online">Offline</option>
+          </select>
+
+          <!-- <input
             class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
-            name="semester"
+            name="medium"
             required
-            placeholder="Your current and remaining semesters"
-            v-model.trim="form.semester"
-          />
+            placeholder="Your current and remaining mediums"
+            v-model.trim="form.medium"
+          /> -->
 
           <label class="block py-2" for="college">College</label>
           <input
@@ -116,7 +139,7 @@
             type="text"
             name="college"
             required
-            placeholder="College name"
+            placeholder="Select training type"
             v-model.trim="form.location"
           />
 
@@ -151,6 +174,12 @@
         </form>
       </div>
     </div>
+
+    <Testimonials
+      class="pb-12 hidden lg:block"
+      :title="'Student Testimonials'"
+      :slides="testimonials"
+    />
   </div>
 </template>
 
@@ -188,6 +217,30 @@
           }
         ],
 
+        testimonials: [
+          {
+            text:
+              'Veniam reprehenderit soluta temporibus ad exercitationem iste totam cumque corporis molestiae ex, et cupiditate voluptate. Eum, quibusdam modi? Laudantium pariatur, nihil error magni nam enim quisquam magnam eveniet explicabo repellat nobis ad consequatur vel dolorem, nisi deserunt eius, beatae iusto consectetur debitis velit.',
+            name: 'Student One',
+            about: 'Developer, XYZ Company',
+            image: 'https://picsum.photos/200/200?grayscale&random=1'
+          },
+          {
+            text:
+              'Veniam reprehenderit soluta temporibus ad exercitationem iste totam cumque corporis molestiae ex, et cupiditate voluptate. Eum, quibusdam modi? Laudantium pariatur, nihil error magni nam enim quisquam magnam eveniet explicabo repellat nobis ad consequatur vel dolorem, nisi deserunt eius, beatae iusto consectetur debitis velit.',
+            name: 'Student Two',
+            about: 'Instructor, ABC School',
+            image: 'https://picsum.photos/200/200?grayscale&random=2'
+          },
+          {
+            text:
+              'Veniam reprehenderit soluta temporibus ad exercitationem iste totam cumque corporis molestiae ex, et cupiditate voluptate. Eum, quibusdam modi? Laudantium pariatur, nihil error magni nam enim quisquam magnam eveniet explicabo repellat nobis ad consequatur vel dolorem, nisi deserunt eius, beatae iusto consectetur debitis velit.',
+            name: 'Student Three',
+            about: 'Student, XYZ College',
+            image: 'https://picsum.photos/200/200?grayscale&random=3'
+          }
+        ],
+
         trainings: [
           {
             title: 'IT Course 1',
@@ -218,7 +271,7 @@
           location: '',
           message: '',
           course: '',
-          semester: '',
+          medium: '-1',
           college: '',
           enquiryFor: ''
         }

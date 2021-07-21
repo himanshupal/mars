@@ -2,7 +2,7 @@
   <main>
     <Header />
     <div
-      class="fixed w-14 h-14 p-1.5 rounded transform rotate-45 bg-white bottom-3 -right-7 z-50 items-end cursor-pointer flex transition-all duration-500 shadow-xl"
+      class="fixed p-1.5 rounded transform rotate-45 bg-white bottom-5 right-5 z-50 items-center justify-center cursor-pointer flex transition-all duration-500 shadow-xl"
       :class="{ 'opacity-0': hidden }"
       @click="goto"
     >

@@ -24,7 +24,10 @@ export default {
   css: ['@/assets/css/main'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '@/plugins/Flicking', mode: 'client' }],
+  plugins: [
+    { src: '@/plugins/Flicking', mode: 'client' },
+    { src: '@/plugins/VeeValidate', mode: 'client' }
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

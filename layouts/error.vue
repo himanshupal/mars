@@ -21,7 +21,7 @@
     props: ['error'],
 
     methods: {
-      async goto() {
+      async goto(): Promise<void> {
         await this.$router.replace('/')
       }
     }
