@@ -19,7 +19,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
-    "swiper": "5.x",
+    "swiper": "6.x",
     "vee-validate": "^3.4.11"
   },
   "devDependencies": {
