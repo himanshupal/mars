@@ -15,8 +15,8 @@
             :alt="`${members[0].name}`"
           />
         </div>
-        <div class="py-3 md:w-2/3 text-justify md:text-left lg:pr-24 xl:pr-48">
-          <div class="pb-4 font-light">
+        <div class="py-3 md:w-2/3 lg:pr-24 xl:pr-48">
+          <div class="text-sm sm:text-base pb-4 font-light">
             {{ members[0].message }}
           </div>
 

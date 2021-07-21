@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-6 text-center py-10 items-center">
-    <div class="text-4xl">Our Team Members</div>
+    <div class="text-4xl font-bold">Our Team Members</div>
     <div class="text-sm font-light px-4 max-w-sm">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
       repudiandae dolorem perspiciatis assumenda perferendis deserunt.

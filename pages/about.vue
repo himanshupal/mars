@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col bg-gray-900 text-white py-10">
     <div class="text-5xl pt-5 px-10 lg:px-24 font-bold">About Us</div>
-    <div class="py-5 px-10 lg:px-24 text-sm font-light text-justify sm:w-4/5">
+    <div class="py-5 px-10 lg:px-24 text-sm font-light sm:w-4/5">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad minus iusto
       quae pariatur excepturi, ratione debitis. Corrupti rem impedit praesentium
       ipsam odit itaque recusandae quibusdam beatae, blanditiis sapiente omnis
@@ -18,6 +18,32 @@
     <Features />
     <!-- <Members /> -->
     <Founder />
+    <Testimonials
+      :title="'Student Testimonials'"
+      :slides="[
+        {
+          text:
+            'Veniam reprehenderit soluta temporibus ad exercitationem iste totam cumque corporis molestiae ex, et cupiditate voluptate. Eum, quibusdam modi? Laudantium pariatur, nihil error magni nam enim quisquam magnam eveniet explicabo repellat nobis ad consequatur vel dolorem, nisi deserunt eius, beatae iusto consectetur debitis velit.',
+          name: 'Student One',
+          about: 'Developer, XYZ Company',
+          image: 'https://picsum.photos/200/200?grayscale&random=1'
+        },
+        {
+          text:
+            'Veniam reprehenderit soluta temporibus ad exercitationem iste totam cumque corporis molestiae ex, et cupiditate voluptate. Eum, quibusdam modi? Laudantium pariatur, nihil error magni nam enim quisquam magnam eveniet explicabo repellat nobis ad consequatur vel dolorem, nisi deserunt eius, beatae iusto consectetur debitis velit.',
+          name: 'Student Two',
+          about: 'Instructor, ABC School',
+          image: 'https://picsum.photos/200/200?grayscale&random=2'
+        },
+        {
+          text:
+            'Veniam reprehenderit soluta temporibus ad exercitationem iste totam cumque corporis molestiae ex, et cupiditate voluptate. Eum, quibusdam modi? Laudantium pariatur, nihil error magni nam enim quisquam magnam eveniet explicabo repellat nobis ad consequatur vel dolorem, nisi deserunt eius, beatae iusto consectetur debitis velit.',
+          name: 'Student Three',
+          about: 'Student, XYZ College',
+          image: 'https://picsum.photos/200/200?grayscale&random=3'
+        }
+      ]"
+    />
     <Portfolio />
   </div>
 </template>

@@ -39,9 +39,9 @@
       <NuxtLink class="font-bold text-xl" to="/services">
         Our Services
       </NuxtLink>
-      <NuxtLink to="/website">Website Development</NuxtLink>
-      <NuxtLink to="/webapp">Web App Development</NuxtLink>
-      <NuxtLink to="/desktop">Desktop App Development</NuxtLink>
+      <NuxtLink to="/services/website">Website Development</NuxtLink>
+      <NuxtLink to="/services/webapp">Web App Development</NuxtLink>
+      <NuxtLink to="/services/desktop">Desktop App Development</NuxtLink>
     </div>
     <form
       class="flex flex-col gap-2 text-xl justify-center lg:justify-end"

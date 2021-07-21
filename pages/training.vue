@@ -1,9 +1,8 @@
 <template>
   <div class="bg-gray-900 text-white">
     <Carousel :slides="slides" />
-    <div class="text-4xl my-16 sm:my-24 px-10 lg:px-20 font-semibold">
-      We provide online &amp; offline trainings for various IT &amp; non IT
-      courses
+    <div class="text-4xl my-16 sm:my-24 px-10 lg:px-20 font-bold">
+      We provide online &amp; offline trainings for various IT courses
     </div>
     <div
       class="flex flex-col lg:flex-row w-full px-8 lg:px-16 gap-10 items-center lg:items-start"

@@ -38,3 +38,12 @@ $background: #111827;
 .flicking-pagination-bullet-active {
   background: #fff !important;
 }
+
+.flicking-arrow-prev::before,
+.flicking-arrow-prev::after,
+.flicking-arrow-next::before,
+.flicking-arrow-next::after {
+  width: 30px !important;
+  height: 1px !important;
+  background: #fff !important;
+}

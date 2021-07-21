@@ -2,7 +2,7 @@
   <div id="services" class="flex flex-col gap-6 text-center py-10">
     <!-- General Services -->
     <div class="text-xl">Our Services</div>
-    <div class="text-4xl">
+    <div class="text-4xl font-bold">
       IT Solutions for startup &amp; enterprises
     </div>
     <div class="flex gap-10 justify-evenly pt-5 flex-wrap px-10">
@@ -46,7 +46,7 @@
 
     <!-- Tailored Services -->
     <div class="text-xl">We also provide</div>
-    <div class="text-4xl">
+    <div class="text-4xl font-bold">
       Tailored IT services that respects your needs
     </div>
     <div class="flex gap-10 justify-evenly pt-5 flex-wrap px-10">
