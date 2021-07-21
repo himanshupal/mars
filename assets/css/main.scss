@@ -39,6 +39,17 @@ $background: #111827;
   background: #fff !important;
 }
 
+.flicking-arrow-prev {
+  @media (max-width: 640px) {
+    left: -1.5rem !important;
+  }
+}
+.flicking-arrow-next {
+  @media (max-width: 640px) {
+    right: -1.5rem !important;
+  }
+}
+
 .flicking-arrow-prev::before,
 .flicking-arrow-prev::after,
 .flicking-arrow-next::before,

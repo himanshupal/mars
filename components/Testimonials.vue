@@ -12,7 +12,7 @@
       <div
         v-for="(slide, index) in slides"
         :key="`slide-${index + 1}`"
-        class="flex flex-col md:flex-row w-full items-center justify-center px-10 sm:px-16 lg:px-24"
+        class="flex flex-col md:flex-row w-full items-center justify-center px-0 sm:px-16 lg:px-24"
       >
         <img
           :src="slide.image"
