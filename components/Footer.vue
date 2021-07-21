@@ -29,7 +29,7 @@
       <NuxtLink class="block lg:hidden whitespace-nowrap" to="/services">
         Our Services
       </NuxtLink>
-      <NuxtLink to="/training">Trainings</NuxtLink>
+      <NuxtLink to="/training">Training</NuxtLink>
       <NuxtLink to="/careers">Careers</NuxtLink>
       <NuxtLink to="/contact">Contact Us</NuxtLink>
     </div>
