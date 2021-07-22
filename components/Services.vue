@@ -2,10 +2,15 @@
   <div id="services" class="flex flex-col gap-6 text-center py-10">
     <!-- General Services -->
     <div class="text-xl">Our Services</div>
-    <div class="text-4xl font-bold">
+
+    <div v-if="generalServices" class="text-4xl font-bold">
       IT Solutions for startup &amp; enterprises
     </div>
-    <div class="flex gap-10 justify-evenly pt-5 flex-wrap px-10">
+
+    <div
+      v-if="generalServices"
+      class="flex gap-10 justify-evenly pt-5 flex-wrap px-10"
+    >
       <div
         v-for="(service, index) in generalServices"
         :key="`general-service-${index + 1}`"
@@ -17,25 +22,31 @@
           <img
             loading="lazy"
             width="56"
-            :src="require(`@/assets/icons/${service.icon}.svg`)"
-            :alt="`icon-${service.icon}`"
+            :src="require(`@/assets/icons/${service.image}.svg`)"
+            :alt="`icon-${service.image}`"
           />
         </div>
-        <NuxtLink :to="service.path">
+
+        <NuxtLink :to="service.link">
           <div class="text-2xl font-bold text-gray-900 text-center pt-4 pb-1">
             {{ service.title }}
           </div>
         </NuxtLink>
+
         <div class="text-sm text-center">
           {{ service.text }}
         </div>
-        <NuxtLink :to="service.path" class="text-xs pt-1">
+
+        <NuxtLink :to="service.link" class="text-xs pt-1">
           Know More
         </NuxtLink>
       </div>
     </div>
 
-    <div class="flex items-center justify-center">
+    <div
+      v-if="generalServices && tailoredServices"
+      class="flex items-center justify-center"
+    >
       <img
         loading="lazy"
         class="h-96"
@@ -45,11 +56,17 @@
     </div>
 
     <!-- Tailored Services -->
-    <div class="text-xl">We also provide</div>
-    <div class="text-4xl font-bold">
+    <div v-if="generalServices && tailoredServices" class="text-xl">
+      We also provide
+    </div>
+    <div v-if="tailoredServices" class="text-4xl font-bold">
       Tailored IT services that respects your needs
     </div>
-    <div class="flex gap-10 justify-evenly pt-5 flex-wrap px-10">
+
+    <div
+      v-if="tailoredServices"
+      class="flex gap-10 justify-evenly pt-5 flex-wrap px-10"
+    >
       <div
         v-for="(service, index) in tailoredServices"
         :key="`tailored-service-${index + 1}`"
@@ -61,10 +78,11 @@
           <img
             loading="lazy"
             width="40"
-            :src="require(`@/assets/icons/${service.icon}.svg`)"
-            :alt="`icon-${service.icon}`"
+            :src="require(`@/assets/icons/${service.image}.svg`)"
+            :alt="`icon-${service.image}`"
           />
         </div>
+
         <div
           class="text-2xl font-semibold text-center pt-4 pb-1 flex flex-grow items-center"
         >
@@ -77,55 +95,35 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import { Services } from 'models/Services'
+  import { PropsModel } from '@/models/PropsModel'
 
   export default Vue.extend({
     name: 'Services',
 
-    data(): Services {
-      return {
-        generalServices: [
-          {
-            title: 'Website Development',
-            text:
-              'Need a cool website for your business ? \n Let us join you on your journey to success',
-            icon: 'shield',
-            path: '/services/website'
-          },
-          {
-            title: 'Web App Development',
-            text:
-              'When your business requires a customised application accessible globally over internet',
-            icon: 'web',
-            path: '/services/webapp'
-          },
-          {
-            title: 'Desktop App Development',
-            text:
-              'Secure desktop app development using cutting edge technogies for faster & safer access',
-            icon: 'server',
-            path: '/services/desktop'
-          }
-        ],
-
-        tailoredServices: [
-          {
-            title: 'Education & Health',
-            icon: 'shield'
-          },
-          {
-            title: 'Retail & Commerce',
-            icon: 'web'
-          },
-          {
-            title: 'Training Services',
-            icon: 'server'
-          },
-          {
-            title: 'Travel & Hospitality',
-            icon: 'server'
-          }
-        ]
+    props: {
+      generalServices: {
+        type: Array,
+        validator(v: Array<PropsModel>) {
+          return v.every(
+            (x) =>
+              typeof x === 'object' &&
+              Object.keys(x).includes('text') &&
+              Object.keys(x).includes('link') &&
+              Object.keys(x).includes('title') &&
+              Object.keys(x).includes('image')
+          )
+        }
+      },
+      tailoredServices: {
+        type: Array,
+        validator(v: Array<PropsModel>) {
+          return v.every(
+            (x) =>
+              typeof x === 'object' &&
+              Object.keys(x).includes('title') &&
+              Object.keys(x).includes('image')
+          )
+        }
       }
     }
   })

@@ -37,28 +37,35 @@
 </template>
 
 <script lang="ts">
-  import { FlickingOptions } from '@egjs/flicking'
-  import { Arrow, AutoPlay, Pagination } from '@egjs/flicking-plugins'
-  import '@egjs/flicking-plugins/css/arrow.css'
-
   import Vue from 'vue'
 
-  interface Training {
-    options: FlickingOptions
-    plugins: Array<any>
-  }
+  import { PropsModel } from '@/models/PropsModel'
+  import { CarouselModel } from '@/models/CarouselModel'
+  import { Arrow, AutoPlay, Pagination } from '@egjs/flicking-plugins'
 
   export default Vue.extend({
     name: 'Testimonials',
 
     props: {
-      slides: { type: Array, required: true },
-      title: String
+      title: String,
+      slides: {
+        type: Array,
+        required: true,
+        validator(v: Array<PropsModel>) {
+          return v.every(
+            (x) =>
+              typeof x === 'object' &&
+              Object.keys(x).includes('text') &&
+              Object.keys(x).includes('name') &&
+              Object.keys(x).includes('about') &&
+              Object.keys(x).includes('image')
+          )
+        }
+      }
     },
 
-    data(): Training {
+    data(): CarouselModel {
       return {
-        // @ts-ignore
         options: {
           renderOnlyVisible: true,
           deceleration: 0.1,

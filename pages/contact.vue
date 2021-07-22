@@ -14,7 +14,7 @@
         required
         @keypress="alphaOnly"
         placeholder="John Doe"
-        v-model.trim="name"
+        v-model.trim="form.name"
       />
 
       <label class="block py-2" for="email">
@@ -27,7 +27,7 @@
         required
         @keypress="emailCharsOnly"
         placeholder="johndoe@email.com"
-        v-model.trim="email"
+        v-model.trim="form.email"
       />
 
       <label class="block py-2" for="mobile">
@@ -42,7 +42,7 @@
         @blur="validateContact"
         @keypress="numericOnly"
         placeholder="+XX-XXX-XXX-XXXX"
-        v-model.trim="mobile"
+        v-model.trim="form.mobile"
       />
       <span class="text-xs text-yellow-300 pt-1 max-w-xs">
         {{ mobileError }}
@@ -56,7 +56,7 @@
         required
         @keypress="charsOnly"
         placeholder="New Delhi, India"
-        v-model.trim="location"
+        v-model.trim="form.location"
       />
 
       <label class="block py-2" for="subject">
@@ -67,7 +67,7 @@
         name="subject"
         rows="3"
         placeholder="Write your query in detail here..."
-        v-model.trim="subject"
+        v-model.trim="form.message"
       />
 
       <button
@@ -79,8 +79,8 @@
 
       <div class="text-center text-sm pb-2">
         or you may contact us at
-        <a :href="`mailto:${siteMail}`" class="outline-none font-semibold">
-          {{ siteMail }}
+        <a href="mailto:desk@marsit.org" class="outline-none font-semibold">
+          desk@marsit.org
         </a>
       </div>
     </form>
@@ -90,21 +90,22 @@
 <script lang="ts">
   import Vue from 'vue'
   import validation from '@/mixins/validation'
+  import { Contact } from '@/models/Contact'
 
   export default Vue.extend({
-    name: 'Contact',
+    name: 'ContactPage',
 
-    data() {
+    data(): Contact {
       return {
-        siteMail: 'desk@marsit.org',
+        mobileError: '',
 
-        name: '',
-        email: '',
-        mobile: '',
-        location: '',
-        subject: '',
-
-        mobileError: ''
+        form: {
+          name: '',
+          email: '',
+          mobile: '',
+          location: '',
+          message: ''
+        }
       }
     },
 
@@ -113,16 +114,16 @@
     methods: {
       submitForm(): void {
         console.log({
-          name: this.name,
-          email: this.email,
-          mobile: this.mobile,
-          location: this.location,
-          subject: this.subject
+          name: this.form.name,
+          email: this.form.email,
+          mobile: this.form.mobile,
+          location: this.form.location,
+          message: this.form.message
         })
       },
 
       validateContact(e: InputEvent) {
-        if (/([6-9][\d]{9})+/.test(this.mobile)) this.mobileError = ''
+        if (/([6-9][\d]{9})+/.test(this.form.mobile)) this.mobileError = ''
         else this.mobileError = 'First digit of mobile must be between 6 & 9'
       }
     }

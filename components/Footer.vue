@@ -10,6 +10,7 @@
           alt="Mars IT Services Logo"
         />
       </div>
+
       <div
         class="flex-col hidden md:flex font-bold text-xl gap-1 lg:gap-2 justify-center lg:justify-end px-3"
       >
@@ -21,6 +22,7 @@
         <NuxtLink to="/careers">Careers</NuxtLink>
         <NuxtLink to="/contact">Contact Us</NuxtLink>
       </div>
+
       <div
         class="flex-col gap-3 font-light justify-center lg:justify-end hidden lg:flex px-3"
       >
@@ -31,9 +33,10 @@
         <NuxtLink to="/services/webapp">Web App Development</NuxtLink>
         <NuxtLink to="/services/desktop">Desktop App Development</NuxtLink>
       </div>
+
       <form
         class="flex flex-col gap-2 text-xl justify-center lg:justify-end"
-        @submit.prevent="join"
+        @submit.prevent="submitForm"
       >
         <label class="block font-bold" for="email">
           Subscribe to our mailing list
@@ -55,53 +58,24 @@
           Join
         </button>
       </form>
+
       <div class="flex sm:flex-col gap-3 justify-center">
         <a
-          href="https://fb.com/facebook"
+          v-for="(media, index) in socials"
+          :href="`https://${media.url}`"
           target="_blank"
+          :key="`social-${index}`"
           rel="noopener noreferrer"
         >
           <img
             class="w-6 h-6 object-contain"
-            src="@/assets/icons/facebook.svg"
-            alt="Icon"
-          />
-        </a>
-        <a
-          href="https://instagram.com/instagram"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            class="w-6 h-6 object-contain"
-            src="@/assets/icons/instagram.svg"
-            alt="Icon"
-          />
-        </a>
-        <a
-          href="https://linkedin.com/in/linkedin"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            class="w-6 h-6 object-contain"
-            src="@/assets/icons/linkedin.svg"
-            alt="Icon"
-          />
-        </a>
-        <a
-          href="https://wa.me/919876543210"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            class="w-6 h-6 object-contain"
-            src="@/assets/icons/whatsapp.svg"
+            :src="require(`@/assets/icons/${media.icon}.svg`)"
             alt="Icon"
           />
         </a>
       </div>
     </div>
+
     <div
       class="flex items-center justify-center text-sm font-light bg-gray-900 opacity-95 text-white px-8 lg:px-12 xl:px-16 py-2"
     >
@@ -121,12 +95,31 @@
 
     data() {
       return {
-        email: ''
+        email: '',
+
+        socials: [
+          {
+            url: 'facebook.com/facebook',
+            icon: 'facebook'
+          },
+          {
+            url: 'instagram.com/instagram',
+            icon: 'instagram'
+          },
+          {
+            url: 'linkedin.com/company/linkedin',
+            icon: 'linkedin'
+          },
+          {
+            url: 'wa.me/919876543210',
+            icon: 'whatsapp'
+          }
+        ]
       }
     },
 
     methods: {
-      join() {
+      submitForm() {
         console.log(this.email)
       }
     }

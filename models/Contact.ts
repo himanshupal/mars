@@ -1,9 +1,6 @@
-export interface ContactData {
-  siteMail?: string
+import { FormModel } from './FormModel'
 
-  name: string
-  email: string
-  mobile: string
-  location: string
-  subject?: string
+export interface Contact {
+  form: FormModel
+  mobileError: string
 }

@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col gap-6 text-center py-10 items-center">
     <div class="text-4xl font-bold">Our Team Members</div>
+
     <div class="text-sm font-light px-4 max-w-sm">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-      repudiandae dolorem perspiciatis assumenda perferendis deserunt.
+      {{ info }}
     </div>
     <div class="flex flex-wrap justify-evenly">
       <div
@@ -21,9 +21,11 @@
             :alt="`${member.name}`"
           />
         </div>
+
         <div class="text-xl pt-4">
           {{ member.name }}
         </div>
+
         <span class="text-sm font-light">
           {{ member.designation }}
         </span>
@@ -34,20 +36,25 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import { Members } from '~/models/Members'
+  import { Member } from '@/models/Member'
 
   export default Vue.extend({
     name: 'Members',
 
-    data(): Members {
-      return {
-        members: [
-          {
-            name: 'Ritik Verma',
-            designation: 'Founder, & CEO',
-            avatar: 'ritik.jpeg'
-          }
-        ]
+    props: {
+      info: String,
+      members: {
+        type: Array,
+        required: true,
+        validator(v: Array<Member>) {
+          return v.every(
+            (x) =>
+              typeof x === 'object' &&
+              Object.keys(x).includes('name') &&
+              Object.keys(x).includes('avatar') &&
+              Object.keys(x).includes('designation')
+          )
+        }
       }
     }
   })

@@ -1,21 +1,21 @@
-import { ContactData } from './Contact'
+import { FormModel } from './FormModel'
 
-export interface Form extends ContactData {
-  position?: string
-  experience?: number | string
-  message: string
+export interface Job {
+  designation: string
+  description: string
+  vacancies?: number
+  location?: string
+  applyBy?: string
+}
+
+interface CareerForm extends FormModel {
+  position: string
+  experience: number
 }
 
 export interface Careers {
-  jobSelected: boolean
-  form: Form
+  form: CareerForm
   mobileError: string
-
-  jobs: Array<{
-    designation: string
-    location?: string
-    vacancies?: number
-    description: string
-    applyBy?: string
-  }>
+  jobSelected: boolean
+  jobs: Array<Job>
 }

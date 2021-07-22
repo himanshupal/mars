@@ -15,9 +15,29 @@
       id hic blanditiis non ab itaque, perferendis officiis incidunt, quo
       accusamus? Molestiae doloremque vero, dignissimos beatae odio optio amet.
     </div>
-    <Features />
+    <Features :info="features.info" :features="features.list" />
     <!-- <Members /> -->
     <Founder />
-    <Portfolio />
+    <Portfolio :info="portfolio.info" :products="portfolio.list" />
   </div>
 </template>
+
+<script lang="ts">
+  import Vue from 'vue'
+
+  export default Vue.extend({
+    name: 'AboutPage',
+
+    computed: {
+      features() {
+        return this.$store.state.features
+      },
+      portfolio() {
+        return this.$store.state.portfolio
+      },
+      founder() {
+        return this.$store.state.members.founder
+      }
+    }
+  })
+</script>

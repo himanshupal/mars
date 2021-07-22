@@ -7,7 +7,8 @@
       <div
         class="w-full md:w-1/2 md:p-5 py-12 sm:py-16 md:py-0 md:pl-0 text-2xl md:text-3xl flex items-center justify-center text-center font-light"
       >
-        {{ textOne }}
+        Getting a mobile friendly website which defines your product well is
+        more important than ever for our any business to grow
       </div>
       <div class="md:w-1/2 flex">
         <Flicking :options="options" :plugins="plugins">
@@ -81,8 +82,6 @@
       return {
         carousel: false,
         wide: false,
-        textOne:
-          'Getting a mobile friendly website which defines your product well is more important than ever for our any business to grow',
         images: [
           'https://picsum.photos/288/288?grayscale&random=1',
           'https://picsum.photos/288/288?grayscale&random=2',

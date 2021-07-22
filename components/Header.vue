@@ -53,12 +53,12 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import { HeaderData } from '@/models/Header'
+  import { HeaderModel } from '@/models/Header'
 
   export default Vue.extend({
     name: 'Header',
 
-    data(): HeaderData {
+    data(): HeaderModel {
       return {
         menu: false,
 

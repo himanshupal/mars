@@ -2,8 +2,7 @@
   <div class="flex flex-col gap-6 text-center py-10">
     <div class="text-4xl font-bold">Why choose us?</div>
     <div class="text-sm font-light px-4 max-w-sm mx-auto">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-      repudiandae dolorem perspiciatis assumenda perferendis deserunt.
+      {{ info }}
     </div>
     <div class="flex gap-10 justify-evenly pt-5 flex-wrap px-10">
       <div
@@ -17,8 +16,8 @@
           <img
             loading="lazy"
             width="40"
-            :src="require(`@/assets/icons/${feature.icon}.svg`)"
-            :alt="`icon-${feature.icon}`"
+            :src="require(`@/assets/icons/${feature.image}.svg`)"
+            :alt="`icon-${feature.image}`"
           />
         </div>
         <div class="text-2xl font-semibold text-center pt-4 pb-1">
@@ -34,39 +33,25 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import { Features } from 'models/Features'
+  import { PropsModel } from '@/models/PropsModel'
 
   export default Vue.extend({
     name: 'Features',
 
-    data(): Features {
-      return {
-        features: [
-          {
-            title: 'Great Support',
-            icon: 'shield',
-            text:
-              'Mars brings the power of artificial intelligence & data science to every business'
-          },
-          {
-            title: 'Professional Service',
-            icon: 'web',
-            text:
-              'Mars brings the power of artificial intelligence & data science to every business'
-          },
-          {
-            title: 'Expert Technicians',
-            icon: 'server',
-            text:
-              'Mars brings the power of artificial intelligence & data science to every business'
-          },
-          {
-            title: 'Professional Service',
-            icon: 'web',
-            text:
-              'Mars brings the power of artificial intelligence & data science to every business'
-          }
-        ]
+    props: {
+      info: String,
+      features: {
+        type: Array,
+        required: true,
+        validator(v: Array<PropsModel>) {
+          return v.every(
+            (x) =>
+              typeof x === 'object' &&
+              Object.keys(x).includes('title') &&
+              Object.keys(x).includes('image') &&
+              Object.keys(x).includes('text')
+          )
+        }
       }
     }
   })

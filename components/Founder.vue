@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col gap-6 py-10">
     <div class="text-5xl pt-5 px-10 lg:px-24 font-bold">CEO Speaks</div>
+
     <div class="flex flex-wrap">
       <div
         class="text-white px-10 lg:px-24 font-semibold rounded-xl pb-4 flex flex-col md:flex-row items-center md:items-start lg:items-end"
@@ -11,21 +12,19 @@
           <img
             loading="lazy"
             class="rounded-br-2xl rounded-tr-xl rounded-bl-xl rounded-tl-2xl md:rounded-bl-none md:rounded-tl-none object-cover"
-            :src="require(`@/assets/images/${members[0].avatar}`)"
-            :alt="`${members[0].name}`"
+            :src="require(`@/assets/images/${founder.avatar}`)"
+            :alt="`${founder.name}`"
           />
         </div>
         <div class="py-3 md:w-2/3 lg:pr-24 xl:pr-48">
           <div class="text-sm sm:text-base pb-4 font-light">
-            {{ members[0].message }}
+            {{ founder.message }}
           </div>
-
           <div class="text-xl">
-            {{ members[0].name }}
+            {{ founder.name }}
           </div>
-
           <span class="text-xs font-light">
-            {{ members[0].designation }}
+            {{ founder.designation }}
           </span>
         </div>
       </div>
@@ -34,24 +33,15 @@
 </template>
 
 <script lang="ts">
-  import { FlickingOptions } from '@egjs/flicking'
   import Vue from 'vue'
-  import { Members } from '~/models/Members'
+  import { Member } from '@/models/Member'
 
   export default Vue.extend({
-    name: 'Members',
+    name: 'Founder',
 
-    data(): Members {
-      return {
-        members: [
-          {
-            name: 'Ritik Verma',
-            designation: 'Founder & CEO',
-            avatar: 'ritik.jpeg',
-            message:
-              'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi explicabo quo esse eius veritatis repellendus quisquam accusamus cupiditate, minus animi eveniet aut id voluptas nihil beatae distinctio rem? Fuga, reiciendis. cing elit. Excepturi explicabo quo esse eius veritatis repellendus quisquam accusamus cupiditate, minus animi eveniet aut id voluptas nihil beatae distinction.'
-          }
-        ]
+    computed: {
+      founder(): Member {
+        return this.$store.state.members.founder
       }
     }
   })

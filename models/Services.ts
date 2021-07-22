@@ -1,11 +1,6 @@
-export interface Service {
-  title: string
-  text?: string
-  icon: string
-  path?: string
-}
+import { PropsModel } from './PropsModel'
 
 export interface Services {
-  generalServices: Array<Service>
-  tailoredServices: Array<Service>
+  generalServices: Array<PropsModel>
+  tailoredServices: Array<PropsModel>
 }

@@ -8,17 +8,20 @@
       <div class="text-5xl md:text-6xl lg:text-7xl leading-snug">
         We Provide Best IT Services
       </div>
+
       <div class="text-xl">
         Mars brings the power of data science &amp; artificial intelligence to
         every business
       </div>
+
       <button
         @click="next"
         class="py-3 px-6 rounded-full border-2 bg-white hover:bg-yellow-600 hover:text-white text-gray-900 font-bold text-lg w-48 transition-colors"
       >
-        EXPLORE
+        <div class="uppercase">Explore</div>
       </button>
     </div>
+
     <div class="flex items-center justify-center w-4/5 sm:3/5 md:w-2/5">
       <img
         loading="lazy"

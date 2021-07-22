@@ -1,6 +1,7 @@
 <template>
   <main>
     <Header />
+
     <div
       class="fixed p-1.5 rounded transform rotate-45 bg-white bottom-5 right-5 z-50 items-center justify-center cursor-pointer flex transition-all duration-500 shadow-xl"
       :class="{ 'opacity-0': hidden }"
@@ -12,37 +13,40 @@
         alt="Up Arrow"
       />
     </div>
+
     <Nuxt class="w-full min-h-screen pt-20" />
+
     <Footer />
   </main>
 </template>
 
 <script lang="ts">
   import Vue from 'vue'
+  import { DefaultLayoutModel } from '@/models/DefaultLayoutModel'
 
   export default Vue.extend({
     name: 'DefaultLayout',
 
-    data() {
+    data(): DefaultLayoutModel {
       return {
         hidden: true
       }
     },
 
-    mounted() {
+    mounted(): void {
       window.addEventListener('scroll', this.toggleIcon)
     },
 
-    beforeDestroy() {
+    beforeDestroy(): void {
       window.removeEventListener('scroll', this.toggleIcon)
     },
 
     methods: {
-      toggleIcon() {
+      toggleIcon(): void {
         this.hidden = window.pageYOffset < 250
       },
 
-      goto() {
+      goto(): void {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
       }
     }
