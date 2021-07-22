@@ -9,6 +9,7 @@ export interface Form extends ContactData {
 export interface Careers {
   jobSelected: boolean
   form: Form
+  mobileError: string
 
   jobs: Array<{
     designation: string

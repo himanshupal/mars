@@ -12,6 +12,7 @@
         type="text"
         name="name"
         required
+        @keypress="alphaOnly"
         placeholder="John Doe"
         v-model.trim="name"
       />
@@ -24,6 +25,7 @@
         type="email"
         name="email"
         required
+        @keypress="emailCharsOnly"
         placeholder="johndoe@email.com"
         v-model.trim="email"
       />
@@ -35,10 +37,16 @@
         class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
         type="text"
         name="mobile"
+        maxlength="10"
         required
+        @blur="validateContact"
+        @keypress="numericOnly"
         placeholder="+XX-XXX-XXX-XXXX"
         v-model.trim="mobile"
       />
+      <span class="text-xs text-yellow-300 pt-1 max-w-xs">
+        {{ mobileError }}
+      </span>
 
       <label class="block py-2" for="city">Location</label>
       <input
@@ -46,6 +54,7 @@
         type="text"
         name="city"
         required
+        @keypress="charsOnly"
         placeholder="New Delhi, India"
         v-model.trim="location"
       />
@@ -68,7 +77,7 @@
         Submit
       </button>
 
-      <div class="text-center text-sm">
+      <div class="text-center text-sm pb-2">
         or you may contact us at
         <a :href="`mailto:${siteMail}`" class="outline-none font-semibold">
           {{ siteMail }}
@@ -80,12 +89,12 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import { ContactData } from '@/models/Contact'
+  import validation from '@/mixins/validation'
 
   export default Vue.extend({
     name: 'Contact',
 
-    data(): ContactData {
+    data() {
       return {
         siteMail: 'desk@marsit.org',
 
@@ -93,9 +102,13 @@
         email: '',
         mobile: '',
         location: '',
-        subject: ''
+        subject: '',
+
+        mobileError: ''
       }
     },
+
+    mixins: [validation],
 
     methods: {
       submitForm(): void {
@@ -106,6 +119,11 @@
           location: this.location,
           subject: this.subject
         })
+      },
+
+      validateContact(e: InputEvent) {
+        if (/([6-9][\d]{9})+/.test(this.mobile)) this.mobileError = ''
+        else this.mobileError = 'First digit of mobile must be between 6 & 9'
       }
     }
   })

@@ -68,6 +68,7 @@
             type="text"
             name="name"
             required
+            @keypress="alphaOnly"
             placeholder="John Doe"
             v-model.trim="form.name"
           />
@@ -80,6 +81,7 @@
             type="email"
             name="email"
             required
+            @keypress="emailCharsOnly"
             placeholder="johndoe@email.com"
             v-model.trim="form.email"
           />
@@ -92,9 +94,14 @@
             type="text"
             name="mobile"
             required
+            maxlength="10"
+            @blur="validateContact"
             placeholder="+XX-XXX-XXX-XXXX"
             v-model.trim="form.mobile"
           />
+          <span class="text-xs text-yellow-300 pt-1 max-w-xs">
+            {{ mobileError }}
+          </span>
 
           <label class="block py-2" for="city">Location</label>
           <input
@@ -102,6 +109,7 @@
             type="text"
             name="city"
             required
+            @keypress="charsOnly"
             placeholder="Where are you from ?"
             v-model.trim="form.location"
           />
@@ -112,8 +120,9 @@
             type="text"
             name="position"
             required
-            :disabled="jobSelected"
-            placeholder="Human Resources"
+            @keypress="charsOnly"
+            :disabled="jobs.length"
+            :placeholder="applicationForPlaceholder"
             v-model.trim="form.position"
           />
 
@@ -127,6 +136,7 @@
             required
             min="0"
             max="960"
+            @keypress="numericOnly"
             v-model.trim="form.experience"
           />
 
@@ -163,6 +173,7 @@
     data(): Careers {
       return {
         jobSelected: false,
+        mobileError: '',
 
         form: {
           name: '',
@@ -200,6 +211,15 @@
       }
     },
 
+    computed: {
+      applicationForPlaceholder() {
+        // @ts-ignore
+        return this.jobs.length
+          ? 'Please select one from the job list'
+          : 'E.g. Human Resources'
+      }
+    },
+
     methods: {
       submitForm() {
         console.log(this.form)
@@ -209,6 +229,10 @@
         this.form.position = this.jobs[job].designation
         const form = this.$refs?.form as HTMLElement
         form.focus()
+      },
+      validateContact(e: InputEvent) {
+        if (/([6-9][\d]{9})+/.test(this.form.mobile)) this.mobileError = ''
+        else this.mobileError = 'First digit of mobile must be between 6 & 9'
       }
     }
   })

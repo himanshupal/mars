@@ -59,6 +59,7 @@
             name="name"
             required
             ref="form"
+            @keypress="alphaOnly"
             placeholder="John Doe"
             v-model.trim="form.name"
           />
@@ -71,6 +72,7 @@
             type="email"
             name="email"
             required
+            @keypress="emailCharsOnly"
             placeholder="johndoe@email.com"
             v-model.trim="form.email"
           />
@@ -83,9 +85,14 @@
             type="text"
             name="mobile"
             required
+            maxlength="10"
+            @blur="validateContact"
             placeholder="+XX-XXX-XXX-XXXX"
             v-model.trim="form.mobile"
           />
+          <span class="text-xs text-yellow-300 pt-1 max-w-xs">
+            {{ mobileError }}
+          </span>
 
           <label class="block py-2" for="city">Location</label>
           <input
@@ -93,6 +100,7 @@
             type="text"
             name="city"
             required
+            @keypress="charsOnly"
             placeholder="Where are you from ?"
             v-model.trim="form.location"
           />
@@ -103,26 +111,42 @@
             type="text"
             name="course"
             required
+            @keypress="charsOnly"
             placeholder="Your course &amp; semester"
             v-model.trim="form.course"
           />
 
+          <label class="block py-2" for="college">College</label>
+          <input
+            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
+            type="text"
+            name="college"
+            required
+            @keypress="charsOnly"
+            placeholder="Name of your college"
+            v-model.trim="form.location"
+          />
+
           <label class="block py-2" for="medium">
-            Preffered Medium
+            Preferred Medium
           </label>
           <select
             class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             required
             type="text"
             name="medium"
+            @blur="validateMedium"
             v-model.trim="form.medium"
           >
             <option hidden value="-1">
               Select training type
             </option>
-            <option value="Online">Online</option>
-            <option value="Online">Offline</option>
+            <option>Online</option>
+            <option>Offline</option>
           </select>
+          <span class="text-xs text-yellow-300 pt-1 max-w-xs">
+            {{ mediumError }}
+          </span>
 
           <!-- <input
             class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
@@ -133,22 +157,13 @@
             v-model.trim="form.medium"
           /> -->
 
-          <label class="block py-2" for="college">College</label>
-          <input
-            class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
-            type="text"
-            name="college"
-            required
-            placeholder="Select training type"
-            v-model.trim="form.location"
-          />
-
           <label class="block py-2" for="enquiry">Enquiring for</label>
           <input
             class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="enquiry"
             required
+            @keypress="charsOnly"
             :disabled="trainingSelected"
             placeholder="What do you want to learn about ?"
             v-model.trim="form.enquiryFor"
@@ -185,14 +200,19 @@
 
 <script lang="ts">
   import Vue from 'vue'
+  import validation from '@/mixins/validation'
   import { Training } from 'models/Training'
 
   export default Vue.extend({
     name: 'Training',
 
+    mixins: [validation],
+
     data(): Training {
       return {
         trainingSelected: false,
+        mobileError: '',
+        mediumError: '',
 
         slides: [
           {
@@ -287,6 +307,15 @@
         this.form.enquiryFor = this.trainings[training].title
         const form = this.$refs?.form as HTMLElement
         form.focus()
+      },
+      validateContact(e: InputEvent) {
+        if (/([6-9][\d]{9})+/.test(this.form.mobile)) this.mobileError = ''
+        else this.mobileError = 'First digit of mobile must be between 6 & 9'
+      },
+      validateMedium(e: InputEvent) {
+        if (this.form.medium === '-1')
+          this.mediumError = 'Please select mode of training'
+        else this.mediumError = ''
       }
     }
   })

@@ -43,6 +43,7 @@
           type="email"
           name="email"
           required
+          @keypress="emailCharsOnly"
           title="Email is required"
           placeholder="johndoe@email.com"
           v-model.trim="email"
@@ -111,9 +112,12 @@
 
 <script lang="ts">
   import Vue from 'vue'
+  import validation from '@/mixins/validation'
 
   export default Vue.extend({
     name: 'Footer',
+
+    mixins: [validation],
 
     data() {
       return {

@@ -26,4 +26,6 @@ export interface Training {
   }>
   form: TrainingForm
   trainingSelected: boolean
+  mobileError: string
+  mediumError: string
 }
