@@ -165,10 +165,13 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import { Careers } from 'models/Careers'
+  import validation from '@/mixins/validation'
+  import { Careers } from '~/models/Careers'
 
   export default Vue.extend({
     name: 'Careers',
+
+    mixins: [validation],
 
     data(): Careers {
       return {
@@ -213,10 +216,8 @@
 
     computed: {
       applicationForPlaceholder() {
-        // @ts-ignore
-        return this.jobs.length
-          ? 'Please select one from the job list'
-          : 'E.g. Human Resources'
+        if (this.jobs.length) return 'Please select one from the jobs list'
+        return 'E.g. Human Resources'
       }
     },
 
