@@ -234,7 +234,8 @@
       },
       focusForm(training: number): void {
         this.trainingSelected = true
-        this.form.enquiryFor = this.trainings[training].title
+        // @ts-ignore
+        this.form.enquiryFor = this.trainings.list[training].title
         const form = this.$refs?.form as HTMLElement
         form.focus()
       },
@@ -252,10 +253,10 @@
     },
 
     computed: {
-      testimonials() {
+      testimonials(): Object {
         return this.$store.state.testimonials.students
       },
-      trainings() {
+      trainings(): Object {
         return this.$store.state.trainings
       }
     }

@@ -197,7 +197,7 @@
     },
 
     computed: {
-      jobs() {
+      jobs(): Array<Object> {
         return this.$store.state.careers
       },
       applicationForPlaceholder(): string {
@@ -213,6 +213,7 @@
 
       focusForm(job: number): void {
         this.jobSelected = true
+        // @ts-ignore
         this.form.position = this.jobs[job].designation
 
         const form = this.$refs?.form as HTMLElement
