@@ -21,7 +21,7 @@ export const state = () => ({
         'Mars brings the power of artificial intelligence & data science to every business'
     },
     {
-      title: 'Professional Service',
+      title: 'On Time Delivery',
       image: 'web',
       text:
         'Mars brings the power of artificial intelligence & data science to every business'

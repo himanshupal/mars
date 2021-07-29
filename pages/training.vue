@@ -158,19 +158,19 @@
             v-model.trim="form.medium"
           /> -->
 
-          <label class="block py-2" for="enquiry">Enquiring for</label>
+          <label class="block py-2" for="enquiry">Course interested in</label>
           <input
             class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
             type="text"
             name="enquiry"
             required
+            disabled
             @keypress="charsOnly"
-            :disabled="trainingSelected"
-            placeholder="What do you want to learn about ?"
+            placeholder="Please select a course from courses list"
             v-model.trim="form.enquiryFor"
           />
 
-          <label class="block py-2" for="subject">
+          <!-- <label class="block py-2" for="subject">
             Message
           </label>
           <textarea
@@ -179,7 +179,7 @@
             rows="3"
             placeholder="Have any query or message for us..."
             v-model.trim="form.message"
-          />
+          /> -->
 
           <button
             type="submit"

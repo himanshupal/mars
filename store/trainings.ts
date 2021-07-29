@@ -23,24 +23,32 @@ export const state = () => ({
   ],
   list: [
     {
-      title: 'IT Course 1',
-      duration: '2 Months',
+      title: 'Full Stack Development',
+      duration: '4 Months',
       description:
         'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique inventore pariatur tempora harum saepe! At temporibus eligendi natus deleniti aliquid iste pariatur quaerat? Rerum blanditiis.',
-      cost: 2_599
+      cost: 10_000
     },
     {
-      title: 'IT Course 2',
+      title: 'Python',
+      duration: '3 Months',
+      description:
+        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique inventore pariatur tempora harum saepe! At temporibus eligendi natus deleniti aliquid iste pariatur quaerat? Rerum blanditiis.',
+      cost: 7_500
+    },
+    {
+      title: 'PHP',
+      duration: '2 Months',
       description:
         'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique inventore pariatur tempora harum saepe! At temporibus eligendi natus deleniti aliquid iste pariatur quaerat? Rerum blanditiis corrupti beatae pariatur odit, ipsa reiciendis fuga.',
-      cost: 1_570
+      cost: 3_500
     },
     {
-      title: 'IT Course 3',
-      duration: '9 Months',
+      title: 'JAVA SE',
+      duration: '4 Months',
       description:
         'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique inventore pariatur tempora harum saepe! At temporibus eligendi natus deleniti aliquid iste pariatur quaerat? Rerum blanditiis corrupti beatae pariatur odit, ipsa reiciendis fuga ab animi accusamus eum tempora placeat, dicta incidunt eius, nemo officiis veritatis! Necessitatibus.',
-      cost: 3_000
+      cost: 5_000
     }
   ]
 })

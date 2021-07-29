@@ -57,10 +57,10 @@
 
     <!-- Tailored Services -->
     <div v-if="generalServices && tailoredServices" class="text-xl">
-      We also provide
+      Industries we serve
     </div>
     <div v-if="tailoredServices" class="text-4xl font-bold">
-      Tailored IT services that respects your needs
+      We also provide services in these areas
     </div>
 
     <div

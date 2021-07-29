@@ -34,7 +34,7 @@ export const state = (): Services => ({
       image: 'web'
     },
     {
-      title: 'Training Services',
+      title: 'Industries & Manufacturing',
       image: 'server'
     },
     {
