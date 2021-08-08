@@ -63,14 +63,16 @@
       }
     },
 
-    mounted(): void {
-      window.addEventListener('scroll', this.toggleIcon)
-
+    beforeMount(): void {
       onAuthStateChanged(getAuth(this.app), (user) => {
         if (!user) {
           this.$router.replace('/su/login')
         }
       })
+    },
+
+    mounted(): void {
+      window.addEventListener('scroll', this.toggleIcon)
     },
 
     beforeDestroy(): void {

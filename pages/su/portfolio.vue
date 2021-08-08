@@ -200,6 +200,8 @@
         this.title = ''
         this.about = ''
         this.link = ''
+
+        this.editing = ''
       },
 
       editProject(id: string) {
