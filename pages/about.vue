@@ -18,7 +18,7 @@
     <Features :info="features.info" :features="features.list" />
     <!-- <Members /> -->
     <Founder />
-    <Portfolio :info="portfolio.info" :products="portfolio.list" />
+    <Portfolio />
   </div>
 </template>
 
@@ -31,9 +31,6 @@
     computed: {
       features() {
         return this.$store.state.features
-      },
-      portfolio() {
-        return this.$store.state.portfolio
       },
       founder() {
         return this.$store.state.members.founder

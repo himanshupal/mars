@@ -24,7 +24,10 @@ export default {
   css: ['@/assets/css/main'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '@/plugins/Flicking', mode: 'client' }],
+  plugins: [
+    { src: '@/plugins/Flicking', mode: 'client' },
+    { src: '@/plugins/Toast', mode: 'client' }
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -70,8 +73,6 @@ export default {
   // https://cloudinary.nuxtjs.org
   cloudinary: {
     cloudName: process.env.CLOUDINARY_CLOUD,
-    apiKey: process.env.CLOUDINARY_API_KEY,
-    apiSecret: process.env.CLOUDINARY_API_SECRET,
     secure: true
   }
 }

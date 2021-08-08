@@ -24,16 +24,30 @@
             <td class="px-2 py-1 border-r font-semibold">{{ index + 1 }}.</td>
             <td class="px-2 py-1 border-r">{{ project.title }}</td>
             <td class="px-2 py-1 border-r">{{ project.about }}</td>
-            <td class="px-2 py-1 border-r">{{ project.link }}</td>
+            <td class="px-2 py-1 border-r">
+              <a v-if="project.link" :href="project.link" target="_blank">
+                {{ project.link }}
+              </a>
+            </td>
             <td class="px-2 py-1 border-r">
               <a v-if="project.image" :href="project.image" target="_blank">
-                {{ project.image.substring(0, 50) }}...
+                Link
               </a>
             </td>
             <td class="px-2 py-1">
               <div class="flex gap-2 justify-around">
-                <span class="cursor-pointer hover:text-yellow-600">Edit</span>
-                <span class="cursor-pointer hover:text-red-600">Delete</span>
+                <span
+                  class="cursor-pointer hover:text-yellow-600"
+                  @click="editProject(project.id)"
+                >
+                  Edit
+                </span>
+                <span
+                  class="cursor-pointer hover:text-red-600"
+                  @click="deleteProject(project.id)"
+                >
+                  Delete
+                </span>
               </div>
             </td>
           </tr>
@@ -41,12 +55,12 @@
       </table>
     </div>
 
-    <div v-if="error" class="text-red-500 bg-white rounded p-2 mt-2">
-      {{ error }}
+    <div v-else class="text-5xl font-bold text-center py-7">
+      No Projects Yet!
     </div>
 
     <form class="flex flex-col" @submit.prevent="submitForm">
-      <label class="block py-2 text-3xl">
+      <label class="block py-2 text-3xl border-b">
         Add Project
       </label>
 
@@ -57,7 +71,8 @@
         class="order-r-8 w-full lg:w-1/2 h-9 py-2 px-3 rounded-sm text-gray-900"
         name="title"
         required
-        placeholder="Project Title"
+        maxlength="25"
+        placeholder="Project Title (25 chars MAX)"
         v-model.trim="title"
       />
       <label class="block py-2" for="about">
@@ -67,7 +82,8 @@
         class="order-r-8 w-full lg:w-1/2 h-9 py-2 px-3 rounded-sm text-gray-900"
         name="about"
         required
-        placeholder="Project Description"
+        maxlength="100"
+        placeholder="Project Description (100 chars MAX)"
         v-model.trim="about"
       />
       <label class="block py-2" for="link">
@@ -101,7 +117,7 @@
         name="image"
         hidden
         ref="imageInput"
-        accept="image/*"
+        accept=".jpeg,.jpg,.png,image/jpeg,image/png"
         @change="imageSelect"
       />
 
@@ -124,22 +140,26 @@
 <script lang="ts">
   import Vue from 'vue'
   import {
+    doc,
     addDoc,
     collection,
     Firestore,
     getDocs,
-    getFirestore
+    deleteDoc,
+    getFirestore,
+    updateDoc
   } from 'firebase/firestore'
   import { FirebaseApp, initializeApp } from '@firebase/app'
 
-  interface PortfolioData {
+  interface AdminPortfolioData {
     projects: Array<Record<string, string>>
     app: FirebaseApp
     image: string | ArrayBuffer
     title: string
     about: string
     link: string
-    error: string
+
+    editing?: string
   }
 
   export default Vue.extend({
@@ -147,7 +167,7 @@
 
     layout: 'admin',
 
-    data(): PortfolioData {
+    data(): AdminPortfolioData {
       return {
         app: initializeApp({
           apiKey: this.$config.apiKey,
@@ -164,9 +184,7 @@
         image: '',
         title: '',
         about: '',
-        link: '',
-
-        error: ''
+        link: ''
       }
     },
 
@@ -182,6 +200,31 @@
         this.title = ''
         this.about = ''
         this.link = ''
+      },
+
+      editProject(id: string) {
+        const [project] = this.projects.filter((project) => project.id === id)
+        this.title = project.title
+        this.about = project.about
+        this.link = project.link
+        this.image = project.image
+
+        this.editing = id
+      },
+
+      async deleteProject(id: string) {
+        const confirmed = confirm(
+          `You are about to delete project "${
+            this.projects.filter((project) => project.id === id)[0].title
+          }", are you sure ?`
+        )
+        if (confirmed) {
+          await deleteDoc(doc(this.fireStore, 'portfolio', id))
+          this.projects = this.projects.filter((project) => project.id !== id)
+
+          // @ts-ignore
+          this.$toast.success('Project deleted!')
+        }
       },
 
       imageSelect(e: any) {
@@ -200,25 +243,60 @@
 
       async submitForm() {
         try {
-          // @ts-ignore
+          let imageResponse
 
-          const imageResponse = await this.$cloudinary.upload(
-            this.image.toString(),
-            {
-              uploadPreset: this.$config.uploadPreset
-            }
+          if (
+            this.editing
+              ? this.image !==
+                this.projects.filter(
+                  (project) => project.id === this.editing
+                )[0].image
+              : true
           )
+            // @ts-ignore
+            imageResponse = await this.$cloudinary.upload(
+              this.image.toString(),
+              {
+                uploadPreset: this.$config.uploadPreset,
+                tags: ['mars', 'portfolio']
+              }
+            )
 
-          await addDoc(collection(this.fireStore, 'portfolio'), {
+          const dataToSave = {
             title: this.title,
             about: this.about,
             link: this.link,
-            image: imageResponse.secure_url
-          })
+            image: imageResponse?.secure_url || this.image
+          }
 
-          this.error = 'Uploaded!'
+          if (this.editing) {
+            await updateDoc(
+              doc(this.fireStore, 'portfolio', this.editing),
+              dataToSave
+            )
+            this.projects = [
+              ...this.projects.filter((project) => project.id !== this.editing),
+              { id: this.editing, ...dataToSave }
+            ]
+          } else {
+            const response = await addDoc(
+              collection(this.fireStore, 'portfolio'),
+              dataToSave
+            )
+            this.projects = [
+              ...this.projects,
+              { id: response.id, ...dataToSave }
+            ]
+          }
+
+          // @ts-ignore
+          this.$toast.success(
+            this.editing ? 'Project updated!' : 'Project added to portfolio!'
+          )
+          this.resetForm()
         } catch (e) {
-          this.error = e.message
+          // @ts-ignore
+          this.$toast.error(e)
         }
       }
     },
@@ -230,7 +308,8 @@
           this.projects = [...this.projects, { id: doc.id, ...doc.data() }]
         })
       } catch (e) {
-        this.error = e.message
+        // @ts-ignore
+        this.$toast.error(e)
       }
     }
   })

@@ -7,7 +7,7 @@
     />
     <Features :info="features.info" :features="features.list" />
     <Testimonials :title="testimonials.title" :slides="testimonials.list" />
-    <Portfolio :info="portfolio.info" :products="portfolio.list" />
+    <Portfolio />
   </div>
 </template>
 
@@ -18,9 +18,6 @@
     name: 'Homepage',
 
     computed: {
-      portfolio() {
-        return this.$store.state.portfolio
-      },
       testimonials() {
         return this.$store.state.testimonials.customers
       },
