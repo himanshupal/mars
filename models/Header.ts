@@ -5,5 +5,5 @@ export interface Route {
 
 export interface HeaderModel {
   menu: Boolean
-  routes: Array<Route>
+  routes?: Array<Route>
 }

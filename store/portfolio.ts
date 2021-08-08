@@ -5,21 +5,21 @@ export const state = () => ({
     {
       image: 'https://picsum.photos/500/400?random=1',
       title: 'Product One',
-      text:
+      about:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio corrupti in quibusdam ratione ad vel.',
       link: '/'
     },
     {
       image: 'https://picsum.photos/500/400?random=2',
       title: 'Product Two',
-      text:
+      about:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio corrupti in quibusdam ratione ad vel.',
       link: '/'
     },
     {
       image: 'https://picsum.photos/500/400?random=3',
       title: 'Product Three',
-      text:
+      about:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio corrupti in quibusdam ratione ad vel.',
       link: '/'
     }

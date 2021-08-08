@@ -40,7 +40,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/cloudinary'
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -62,6 +63,15 @@ export default {
     storageBucket: process.env.FIRESTORE_STORAGE_BUCKET,
     messagingSenderId: process.env.FIRESTORE_MESSAGING_SENDER_ID,
     appId: process.env.FIRESTORE_APP_ID,
-    measurementId: process.env.FIRESTORE_MEASUREMENT_ID
+    measurementId: process.env.FIRESTORE_MEASUREMENT_ID,
+    uploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET
+  },
+
+  // https://cloudinary.nuxtjs.org
+  cloudinary: {
+    cloudName: process.env.CLOUDINARY_CLOUD,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
+    secure: true
   }
 }

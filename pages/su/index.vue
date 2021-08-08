@@ -1,9 +1,7 @@
 <template>
-  <div
-    class="bg-green-400 min-h-screen p-5 text-white grid place-content-center"
-  >
+  <div class="bg-green-400 p-5 text-white grid place-content-center">
     <div class="text-4xl sm:text-8xl md:text-9xl py-5 font-bold">
-      Admin Login
+      Hi there!
     </div>
   </div>
 </template>
