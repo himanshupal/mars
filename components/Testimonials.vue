@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-4xl font-bold text-center px-10 lg:px-24 pb-6">
+    <div class="text-4xl font-bold text-center px-10 lg:px-24 pb-6 pt-2">
       {{ title }}
     </div>
 

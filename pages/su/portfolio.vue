@@ -1,8 +1,5 @@
 <template>
   <div class="flex flex-col px-5">
-    <div class="text-5xl pb-2 border-b">
-      Portfolio
-    </div>
     <div v-if="projects.length" class="w-full overflow-auto">
       <table class="border my-4 table-auto w-full">
         <thead class="border">
@@ -31,7 +28,7 @@
             </td>
             <td class="px-2 py-1 border-r">
               <a v-if="project.image" :href="project.image" target="_blank">
-                Link
+                View
               </a>
             </td>
             <td class="px-2 py-1">
@@ -92,6 +89,7 @@
       <input
         class="order-r-8 w-full lg:w-1/2 h-9 py-2 px-3 rounded-sm text-gray-900"
         name="link"
+        type="url"
         placeholder="Link to Project"
         v-model.trim="link"
       />

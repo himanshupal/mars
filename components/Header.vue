@@ -65,7 +65,7 @@
         routes: [
           { path: '/', text: 'Home' },
           { path: '/services', text: 'Services' },
-          { path: '/training', text: 'Training' },
+          { path: '/trainings', text: 'Trainings' },
           { path: '/careers', text: 'Careers' },
           { path: '/about', text: 'About Us' },
           { path: '/contact', text: 'Contact Us' }

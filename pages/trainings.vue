@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-900 text-white">
-    <HeroCarousel :slides="trainings.slides" />
+    <HeroCarousel v-if="slides.length" :slides="slides" />
 
     <div class="text-4xl my-16 sm:my-24 px-10 lg:px-20 font-bold">
       We provide online &amp; offline trainings for various IT courses
@@ -10,9 +10,9 @@
     >
       <div class="flex flex-col lg:w-2/3 w-full">
         <div class="text-2xl pb-10">Trainings we offer</div>
-        <div class="flex flex-wrap gap-y-5 gap-x-5">
+        <div v-if="trainings.length" class="flex flex-wrap gap-y-5 gap-x-5">
           <div
-            v-for="(training, index) in trainings.list"
+            v-for="(training, index) in trainings"
             :key="`training-${index + 1}`"
             class="w-80 sm:w-96 bg-white text-gray-900 p-3 rounded-lg flex flex-col"
           >
@@ -62,7 +62,7 @@
             ref="form"
             @keypress="alphaOnly"
             placeholder="John Doe"
-            v-model.trim="form.name"
+            v-model.trim="name"
           />
 
           <label class="block py-2" for="email">
@@ -75,7 +75,7 @@
             required
             @keypress="emailCharsOnly"
             placeholder="johndoe@email.com"
-            v-model.trim="form.email"
+            v-model.trim="email"
           />
 
           <label class="block py-2" for="mobile">
@@ -89,7 +89,7 @@
             maxlength="10"
             @blur="validateContact"
             placeholder="+XX-XXX-XXX-XXXX"
-            v-model.trim="form.mobile"
+            v-model.trim="mobile"
           />
           <span class="text-xs text-yellow-300 pt-1 max-w-xs">
             {{ mobileError }}
@@ -103,7 +103,7 @@
             required
             @keypress="charsOnly"
             placeholder="Where are you from ?"
-            v-model.trim="form.location"
+            v-model.trim="location"
           />
 
           <label class="block py-2" for="course">Course &amp; Semester</label>
@@ -114,7 +114,7 @@
             required
             @keypress="charsOnly"
             placeholder="Your course &amp; semester"
-            v-model.trim="form.course"
+            v-model.trim="course"
           />
 
           <label class="block py-2" for="college">College</label>
@@ -125,7 +125,7 @@
             required
             @keypress="charsOnly"
             placeholder="Name of your college"
-            v-model.trim="form.location"
+            v-model.trim="location"
           />
 
           <label class="block py-2" for="medium">
@@ -137,7 +137,7 @@
             type="text"
             name="medium"
             @blur="validateMedium"
-            v-model.trim="form.medium"
+            v-model.trim="medium"
           >
             <option hidden value="-1">
               Select training type
@@ -155,7 +155,7 @@
             name="medium"
             required
             placeholder="Your current and remaining mediums"
-            v-model.trim="form.medium"
+            v-model.trim="medium"
           /> -->
 
           <label class="block py-2" for="enquiry">Course interested in</label>
@@ -167,7 +167,7 @@
             disabled
             @keypress="charsOnly"
             placeholder="Please select a course from courses list"
-            v-model.trim="form.enquiryFor"
+            v-model.trim="enquiryFor"
           />
 
           <!-- <label class="block py-2" for="subject">
@@ -178,7 +178,7 @@
             name="message"
             rows="3"
             placeholder="Have any query or message for us..."
-            v-model.trim="form.message"
+            v-model.trim="message"
           /> -->
 
           <button
@@ -202,35 +202,84 @@
 <script lang="ts">
   import Vue from 'vue'
   import validation from '@/mixins/validation'
+  import { FirebaseApp, initializeApp } from '@firebase/app'
+  import {
+    collection,
+    Firestore,
+    getDocs,
+    getFirestore
+  } from '@firebase/firestore'
+
+  interface TrainingData {
+    slides: Array<Record<string, string>>
+    trainings: Array<Record<string, string>>
+
+    app: FirebaseApp
+
+    trainingSelected: boolean
+    mobileError: string
+    mediumError: string
+
+    name: string
+    email: string
+    mobile: string
+    location: string
+    message: string
+    course: string
+    medium: string
+    college: string
+    enquiryFor: string
+  }
 
   export default Vue.extend({
     name: 'TrainingPage',
 
     mixins: [validation],
 
-    data() {
+    data(): TrainingData {
       return {
+        slides: [],
+        trainings: [],
+
         trainingSelected: false,
         mobileError: '',
         mediumError: '',
 
-        form: {
-          name: '',
-          email: '',
-          mobile: '',
-          location: '',
-          message: '',
-          course: '',
-          medium: '-1',
-          college: '',
-          enquiryFor: ''
-        }
+        name: '',
+        email: '',
+        mobile: '',
+        location: '',
+        message: '',
+        course: '',
+        medium: '-1',
+        college: '',
+        enquiryFor: '',
+
+        app: initializeApp({
+          apiKey: this.$config.apiKey,
+          authDomain: this.$config.authDomain,
+          projectId: this.$config.projectId,
+          storageBucket: this.$config.storageBucket,
+          messagingSenderId: this.$config.messagingSenderId,
+          appId: this.$config.appId,
+          measurementId: this.$config.measurementId
+        })
       }
     },
 
     methods: {
       submitForm(): void {
-        console.log(this.form)
+        console.log({
+          name: this.name,
+          email: this.email,
+          mobile: this.mobile,
+          location: this.location,
+          message: this.message,
+          course: this.course,
+          medium: this.medium,
+          college: this.college,
+          enquiryFor: this.enquiryFor
+        })
       },
       focusForm(training: number): void {
         this.trainingSelected = true
@@ -240,11 +289,11 @@
         form.focus()
       },
       validateContact(e: InputEvent): void {
-        if (/([6-9][\d]{9})+/.test(this.form.mobile)) this.mobileError = ''
+        if (/([6-9][\d]{9})+/.test(this.mobile)) this.mobileError = ''
         else this.mobileError = 'First digit of mobile must be between 6 & 9'
       },
       validateMedium(e: InputEvent): void {
-        if (this.form.medium === '-1') {
+        if (this.medium === '-1') {
           this.mediumError = 'Please select mode of training'
         } else {
           this.mediumError = ''
@@ -256,8 +305,27 @@
       testimonials(): Object {
         return this.$store.state.testimonials.students
       },
-      trainings(): Object {
-        return this.$store.state.trainings
+      fireStore(): Firestore {
+        return getFirestore(this.app)
+      }
+    },
+
+    async mounted() {
+      try {
+        const trainings = await getDocs(collection(this.fireStore, 'trainings'))
+        trainings.forEach((doc) => {
+          this.trainings = [...this.trainings, { id: doc.id, ...doc.data() }]
+        })
+
+        const slides = await getDocs(
+          collection(this.fireStore, 'trainings_slides')
+        )
+        slides.forEach((doc) => {
+          this.slides = [...this.slides, { id: doc.id, ...doc.data() }]
+        })
+      } catch (e) {
+        // @ts-ignore
+        this.$toast.error(e)
       }
     }
   })
