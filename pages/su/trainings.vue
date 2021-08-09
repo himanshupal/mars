@@ -75,7 +75,9 @@
             <td class="px-2 py-1 border-r">{{ training.title }}</td>
             <td class="px-2 py-1 border-r">{{ training.description }}</td>
             <td class="px-2 py-1 border-r">{{ training.duration }}</td>
-            <td class="px-2 py-1 border-r">{{ training.cost }}</td>
+            <td class="px-2 py-1 border-r">
+              &#8377; {{ Intl.NumberFormat('en-IN').format(training.cost) }}/-
+            </td>
             <td class="px-2 py-1">
               <div class="flex gap-2 justify-around">
                 <span

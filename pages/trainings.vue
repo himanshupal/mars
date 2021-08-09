@@ -23,7 +23,7 @@
             </div>
             <div class="flex items-center justify-between">
               <div v-if="training.cost" class="text-lg">
-                ₹ {{ training.cost }}/-
+                &#8377; {{ Intl.NumberFormat('en-IN').format(training.cost) }}/-
               </div>
               <button
                 class="text-center border-2 text-white border-white bg-gray-900 hover:bg-yellow-600 rounded-full h-10 w-24"

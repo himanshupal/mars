@@ -56,7 +56,7 @@
       No Projects Yet!
     </div>
 
-    <form class="flex flex-col" @submit.prevent="submitForm">
+    <form class="flex flex-col md:w-2/3 lg:w-1/2" @submit.prevent="submitForm">
       <label class="block py-2 text-3xl border-b">
         Add Project
       </label>
@@ -65,7 +65,7 @@
         Title
       </label>
       <input
-        class="order-r-8 w-full lg:w-1/2 h-9 py-2 px-3 rounded-sm text-gray-900"
+        class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
         name="title"
         required
         maxlength="25"
@@ -76,7 +76,7 @@
         About
       </label>
       <input
-        class="order-r-8 w-full lg:w-1/2 h-9 py-2 px-3 rounded-sm text-gray-900"
+        class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
         name="about"
         required
         maxlength="100"
@@ -87,7 +87,7 @@
         Link
       </label>
       <input
-        class="order-r-8 w-full lg:w-1/2 h-9 py-2 px-3 rounded-sm text-gray-900"
+        class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
         name="link"
         type="url"
         placeholder="Link to Project"
@@ -97,16 +97,12 @@
       <label class="block py-2" for="image">
         Image
       </label>
-      <img
-        v-if="image"
-        class="lg:w-1/2 max-h-48 object-contain mb-3"
-        :src="image"
-      />
+      <img v-if="image" class="max-h-48 object-contain mb-3" :src="image" />
       <button
         else
         type="button"
         @click="$refs.imageInput.click()"
-        class="h-9 px-3 lg:w-1/2 bg-green-500 hover:bg-green-300 hover:text-green-500 rounded-sm font-semibold"
+        class="h-9 px-3 bg-green-500 hover:bg-green-300 hover:text-green-500 rounded-sm font-semibold"
       >
         {{ `${image ? 'Change' : 'Select'} Image` }}
       </button>
@@ -119,7 +115,17 @@
         @change="imageSelect"
       />
 
-      <div class="flex w-full lg:w-1/2 my-4">
+      <div class="text-center text-xs font-bold py-1">OR</div>
+
+      <input
+        class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900"
+        name="imageURL"
+        type="url"
+        placeholder="Paste a URL to image"
+        v-model.trim="image"
+      />
+
+      <div class="flex w-full my-4">
         <button class="bg-green-600 hover:bg-green-700 w-1/2 h-9" type="submit">
           Save
         </button>
