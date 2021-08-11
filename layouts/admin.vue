@@ -51,7 +51,7 @@
           { path: '/su/portfolio', text: 'Portfolio' },
           { path: '/su/trainings', text: 'Trainings' },
           { path: '/su/services', text: 'Services' },
-          { path: '/su/jobs', text: 'Jobs' },
+          { path: '/su/careers', text: 'Careers' },
           { path: '/su/about', text: 'About Us' },
           { path: '/su/feedback_student', text: 'Testimonials - Students' },
           { path: '/su/feedback_client', text: 'Testimonials - Clients' },

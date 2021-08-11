@@ -19,7 +19,7 @@
             class="bg-gray-800 text-white px-6 py-3 rounded-br-3xl"
           >
             <div class="text-3xl font-semibold pb-1 border-b-2">
-              {{ job.designation }}
+              {{ job.title }}
             </div>
             <div class="text-sm py-3 leading-snug text-justify">
               {{ job.description }}
@@ -34,11 +34,18 @@
               </div>
               <button
                 @click="focusForm(index)"
-                class="text-center border-2 text-gray-900 border-white bg-white hover:bg-yellow-600 rounded-full hover:text-white h-12 w-32"
+                :disabled="outDated(index)"
+                class="text-center border-2 text-gray-900 border-white bg-white rounded-full hover:text-white h-12 w-32"
+                :class="
+                  outDated(index) ? 'hover:bg-gray-400' : 'hover:bg-yellow-600'
+                "
               >
                 <div class="font-semibold">Apply</div>
-                <span v-if="job.applyBy" class="text-xs font-light">
-                  by {{ job.applyBy }}
+                <span v-if="job.lastDate" class="text-xs font-light">
+                  by
+                  {{
+                    Intl.DateTimeFormat('en-IN').format(new Date(job.lastDate))
+                  }}
                 </span>
               </button>
             </div>
@@ -74,7 +81,7 @@
               required
               @keypress="alphaOnly"
               placeholder="John Doe"
-              v-model.trim="form.name"
+              v-model.trim="name"
             />
 
             <label class="block py-2" for="email">
@@ -87,7 +94,7 @@
               required
               @keypress="emailCharsOnly"
               placeholder="johndoe@email.com"
-              v-model.trim="form.email"
+              v-model.trim="email"
             />
 
             <label class="block py-2" for="mobile">
@@ -101,7 +108,7 @@
               maxlength="10"
               @blur="validateContact"
               placeholder="+XX-XXX-XXX-XXXX"
-              v-model.trim="form.mobile"
+              v-model.trim="mobile"
             />
             <span class="text-xs text-yellow-300 pt-1 max-w-xs">
               {{ mobileError }}
@@ -115,7 +122,7 @@
               required
               @keypress="charsOnly"
               placeholder="Where are you from ?"
-              v-model.trim="form.location"
+              v-model.trim="location"
             />
 
             <label class="block py-2" for="position">Applying for</label>
@@ -127,7 +134,7 @@
               @keypress="charsOnly"
               :disabled="jobs.length"
               :placeholder="applicationForPlaceholder"
-              v-model.trim="form.position"
+              v-model.trim="position"
             />
 
             <label class="block py-2" for="experience">
@@ -141,7 +148,7 @@
               min="0"
               max="960"
               @keypress="numericOnly"
-              v-model.trim="form.experience"
+              v-model.trim="experience"
             />
 
             <label class="block py-2" for="message">
@@ -152,7 +159,7 @@
               name="message"
               rows="3"
               placeholder="Any message for the recruiter..."
-              v-model.trim="form.message"
+              v-model.trim="message"
             />
 
             <button
@@ -171,58 +178,121 @@
 <script lang="ts">
   import Vue from 'vue'
   import validation from '@/mixins/validation'
-  import { Careers } from '@/models/Careers'
+  import computed from '@/mixins/computed'
+  import {
+    collection,
+    Firestore,
+    getDocs,
+    getFirestore
+  } from '@firebase/firestore'
+  import { FirebaseApp, initializeApp } from '@firebase/app'
+
+  interface CareerData {
+    jobs: Array<Record<string, string>>
+    app: FirebaseApp
+
+    jobSelected: boolean
+    mobileError: string
+
+    name: string
+    email: string
+    mobile: string
+    location: string
+    position: string
+    experience: number
+    message: string
+  }
 
   export default Vue.extend({
     name: 'CareersPage',
 
-    mixins: [validation],
+    mixins: [validation, computed],
 
-    data() {
+    data(): CareerData {
       return {
         mobileError: '',
 
         jobSelected: false,
 
-        form: {
-          name: '',
-          email: '',
-          mobile: '',
-          location: '',
-          position: '',
-          experience: 0,
-          message: ''
-        }
+        jobs: [],
+
+        app: initializeApp({
+          apiKey: this.$config.apiKey,
+          authDomain: this.$config.authDomain,
+          projectId: this.$config.projectId,
+          storageBucket: this.$config.storageBucket,
+          messagingSenderId: this.$config.messagingSenderId,
+          appId: this.$config.appId,
+          measurementId: this.$config.measurementId
+        }),
+
+        name: '',
+        email: '',
+        mobile: '',
+        location: '',
+        position: '',
+        experience: 0,
+        message: ''
       }
     },
 
     computed: {
-      jobs(): Array<Object> {
-        return this.$store.state.careers
-      },
       applicationForPlaceholder(): string {
         if (this.jobs.length) return 'Please select one from the jobs list'
         return 'E.g. Human Resources'
+      },
+      fireStore(): Firestore {
+        return getFirestore(this.app)
       }
     },
 
     methods: {
+      outDated(index: number) {
+        const lastDate: string = this.jobs[index].lastDate
+        if (lastDate) {
+          if (new Date(lastDate) < new Date()) {
+            return true
+          }
+        }
+        return false
+      },
+
       submitForm(): void {
-        console.log(this.form)
+        console.log({
+          name: this.name,
+          email: this.email,
+          mobile: this.mobile,
+          location: this.location,
+          position: this.position,
+          experience: this.experience,
+          message: this.message
+        })
       },
 
       focusForm(job: number): void {
         this.jobSelected = true
         // @ts-ignore
-        this.form.position = this.jobs[job].designation
+        this.position = this.jobs[job].title
 
         const form = this.$refs?.form as HTMLElement
         form.focus()
       },
 
       validateContact(e: InputEvent): void {
-        if (/([6-9][\d]{9})+/.test(this.form.mobile)) this.mobileError = ''
+        if (/([6-9][\d]{9})+/.test(this.mobile)) this.mobileError = ''
         else this.mobileError = 'First digit of mobile must be between 6 & 9'
+      }
+    },
+
+    async mounted() {
+      try {
+        const docs = await getDocs(collection(this.fireStore, 'jobs'))
+        docs.forEach((doc) => {
+          this.jobs = [...this.jobs, { id: doc.id, ...doc.data() }]
+        })
+      } catch (e) {
+        // @ts-ignore
+        this.$toast.error(e)
       }
     }
   })
