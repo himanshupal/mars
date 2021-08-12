@@ -16,6 +16,7 @@
 
     <Nuxt class="w-full min-h-screen pt-20" />
 
+    <Affiliate />
     <Footer />
   </main>
 </template>
