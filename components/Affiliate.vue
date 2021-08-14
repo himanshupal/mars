@@ -3,7 +3,8 @@
 <a target="_blank"  href="https://www.amazon.in/gp/product/B099T7XNGW/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B099T7XNGW&linkCode=as2&tag=eminem04-21&linkId=2ab716b704c10de63c5f610ea22971a2"><img class="rounded" border="0" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B099T7XNGW&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=eminem04-21" ></a>
  <a target="_blank"  href="https://www.amazon.in/gp/product/B099S155JG/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B099S155JG&linkCode=as2&tag=eminem04-21&linkId=bbf1a6c4071f4bd8feda3dc6fbc4ab4c"><img border="0" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B099S155JG&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=eminem04-21" ></a>
  <a target="_blank"  href="https://www.amazon.in/gp/product/B079Q17WXZ/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B079Q17WXZ&linkCode=as2&tag=eminem04-21&linkId=0a3209f123bdd4cad790725a6ba5f1ed"><img border="0" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B079Q17WXZ&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=eminem04-21" ></a>
- </div>
+<a target="_blank"  href="https://www.amazon.in/gp/product/B07MX2W6CN/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B07MX2W6CN&linkCode=as2&tag=eminem04-21&linkId=87a2502f32f70f1ff1ccb2e1ed25ac49"><img border="0" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B07MX2W6CN&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=eminem04-21" ></a>
+</div>
 </template>
 
 <script lang="ts">
