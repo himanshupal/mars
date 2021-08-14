@@ -1,16 +1,72 @@
 <template>
-  <div class="flex flex-wrap justify-center text-center gap-6 py-10 bg-gray-800 items-center">
-<a target="_blank"  href="https://www.amazon.in/gp/product/B099T7XNGW/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B099T7XNGW&linkCode=as2&tag=eminem04-21&linkId=2ab716b704c10de63c5f610ea22971a2"><img class="rounded" border="0" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B099T7XNGW&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=eminem04-21" ></a>
- <a target="_blank"  href="https://www.amazon.in/gp/product/B099S155JG/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B099S155JG&linkCode=as2&tag=eminem04-21&linkId=bbf1a6c4071f4bd8feda3dc6fbc4ab4c"><img border="0" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B099S155JG&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=eminem04-21" ></a>
- <a target="_blank"  href="https://www.amazon.in/gp/product/B079Q17WXZ/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B079Q17WXZ&linkCode=as2&tag=eminem04-21&linkId=0a3209f123bdd4cad790725a6ba5f1ed"><img border="0" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B079Q17WXZ&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=eminem04-21" ></a>
-<a target="_blank"  href="https://www.amazon.in/gp/product/B07MX2W6CN/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B07MX2W6CN&linkCode=as2&tag=eminem04-21&linkId=87a2502f32f70f1ff1ccb2e1ed25ac49"><img border="0" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B07MX2W6CN&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=eminem04-21" ></a>
-</div>
+  <div
+    v-if="products.length"
+    class="flex flex-col text-center text-white gap-6 py-10 px-4 md:px-10 bg-gray-800"
+  >
+    <div class="text-4xl font-bold">Affiliate Products</div>
+
+    <div class="flex flex-wrap justify-center text-center gap-6 items-center">
+      <a
+        v-for="(product, index) in products"
+        :key="`product-${index + 1}`"
+        :href="product.url"
+        target="_blank"
+      >
+        <img class="rounded-lg" :src="product.image" />
+      </a>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue'
 
+  interface Product {
+    url?: string
+    image?: string
+  }
+
+  interface AffiliateData {
+    products: Array<Product>
+  }
+
   export default Vue.extend({
-    name: 'Affiliate'
+    name: 'Affiliate',
+
+    data(): AffiliateData {
+      return {
+        products: []
+      }
+    },
+
+    async mounted() {
+      try {
+        // Google Sheet Public URL
+        const sheetId = `1fPppdeQ_-yPsc30qwKxrK37LdwIU83RGw6cHstZJ4UI`
+
+        const { data } = await this.$axios.get(
+          `http://spreadsheets.google.com/feeds/cells/${sheetId}/1/public/full?alt=json`
+        )
+
+        let product: Product = {}
+
+        data.feed.entry
+          .map(
+            ({ content }: Record<string, Record<string, string>>) =>
+              content['$t']
+          )
+          .forEach((item: string) => {
+            if (product.hasOwnProperty('url')) {
+              product = { ...product, image: item }
+              this.products.push(product)
+              product = {}
+            } else {
+              product = { url: item }
+            }
+          })
+      } catch (e) {
+        console.error(e)
+      }
+    }
   })
 </script>

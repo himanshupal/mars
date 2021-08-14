@@ -355,7 +355,6 @@
           await deleteDoc(doc(this.fireStore, 'trainings_slides', id))
           this.slides = this.slides.filter((slide) => slide.id !== id)
 
-          // @ts-ignore
           this.$toast.success('Slide deleted!')
         }
       },
@@ -372,7 +371,6 @@
             (training) => training.id !== id
           )
 
-          // @ts-ignore
           this.$toast.success('Training deleted!')
         }
       },
@@ -422,7 +420,6 @@
             ]
           }
 
-          // @ts-ignore
           this.$toast.success(
             this.editingTraining
               ? 'Details updated!'
@@ -430,7 +427,6 @@
           )
           this.resetTrainingForm()
         } catch (e) {
-          // @ts-ignore
           this.$toast.error(e)
         }
       },
@@ -446,7 +442,6 @@
                   .image
               : true
           )
-            // @ts-ignore
             imageResponse = await this.$cloudinary.upload(
               this.slideImage.toString(),
               {
@@ -477,13 +472,11 @@
             this.slides = [...this.slides, { id: response.id, ...dataToSave }]
           }
 
-          // @ts-ignore
           this.$toast.success(
             this.editingSlide ? 'Slides updated!' : 'Details added to slides!'
           )
           this.resetSlideForm()
         } catch (e) {
-          // @ts-ignore
           this.$toast.error(e)
         }
       }
@@ -503,7 +496,6 @@
           this.slides = [...this.slides, { id: doc.id, ...doc.data() }]
         })
       } catch (e) {
-        // @ts-ignore
         this.$toast.error(e)
       }
     }
