@@ -45,7 +45,7 @@
         const sheetId = `1fPppdeQ_-yPsc30qwKxrK37LdwIU83RGw6cHstZJ4UI`
 
         const { data } = await this.$axios.get(
-          `http://spreadsheets.google.com/feeds/cells/${sheetId}/1/public/full?alt=json`
+          `https://spreadsheets.google.com/feeds/cells/${sheetId}/1/public/full?alt=json`
         )
 
         let product: Product = {}
