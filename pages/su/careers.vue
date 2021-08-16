@@ -225,7 +225,6 @@
           await deleteDoc(doc(this.fireStore, 'jobs', id))
           this.jobs = this.jobs.filter((job) => job.id !== id)
 
-          // @ts-ignore
           this.$toast.success('Job deleted!')
         }
       },
@@ -257,13 +256,11 @@
             this.jobs = [...this.jobs, { id: response.id, ...dataToSave }]
           }
 
-          // @ts-ignore
           this.$toast.success(
             this.editing ? 'Job details updated!' : 'New Job added to list!'
           )
           this.resetForm()
         } catch (e) {
-          // @ts-ignore
           this.$toast.error(e)
         }
       }
@@ -276,7 +273,6 @@
           this.jobs = [...this.jobs, { id: doc.id, ...doc.data() }]
         })
       } catch (e) {
-        // @ts-ignore
         this.$toast.error(e)
       }
     }

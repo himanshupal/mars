@@ -228,7 +228,6 @@
           await deleteDoc(doc(this.fireStore, 'portfolio', id))
           this.projects = this.projects.filter((project) => project.id !== id)
 
-          // @ts-ignore
           this.$toast.success('Project deleted!')
         }
       },
@@ -259,7 +258,6 @@
                 )[0].image
               : true
           )
-            // @ts-ignore
             imageResponse = await this.$cloudinary.upload(
               this.image.toString(),
               {
@@ -295,13 +293,11 @@
             ]
           }
 
-          // @ts-ignore
           this.$toast.success(
             this.editing ? 'Project updated!' : 'Project added to portfolio!'
           )
           this.resetForm()
         } catch (e) {
-          // @ts-ignore
           this.$toast.error(e)
         }
       }
@@ -314,7 +310,6 @@
           this.projects = [...this.projects, { id: doc.id, ...doc.data() }]
         })
       } catch (e) {
-        // @ts-ignore
         this.$toast.error(e)
       }
     }

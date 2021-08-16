@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-6 text-center py-10">
     <div class="text-4xl font-bold">Why choose us?</div>
     <div class="text-sm font-light px-4 max-w-sm mx-auto">
-      {{ info }}
+      {{ about }}
     </div>
     <div class="flex gap-10 justify-evenly pt-5 flex-wrap px-10">
       <div
@@ -16,15 +16,15 @@
           <img
             loading="lazy"
             width="40"
-            :src="require(`@/assets/icons/${feature.image}.svg`)"
-            :alt="`icon-${feature.image}`"
+            :src="feature.icon"
+            :alt="`icon-${feature.icon}`"
           />
         </div>
         <div class="text-2xl font-semibold text-center pt-4 pb-1">
           {{ feature.title }}
         </div>
         <div class="text-sm text-center font-light">
-          {{ feature.text }}
+          {{ feature.about }}
         </div>
       </div>
     </div>
@@ -33,26 +33,59 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import { PropsModel } from '@/models/PropsModel'
+  import {
+    collection,
+    Firestore,
+    getDocs,
+    getFirestore
+  } from '@firebase/firestore'
+  import { FirebaseApp, initializeApp } from '@firebase/app'
+
+  interface FeaturesData {
+    app: FirebaseApp
+    features: Array<Record<string, string>>
+    about: string
+  }
 
   export default Vue.extend({
     name: 'Features',
 
-    props: {
-      info: String,
-      features: {
-        type: Array,
-        required: true,
-        validator(v: Array<PropsModel>) {
-          return v.every(
-            (x) =>
-              typeof x === 'object' &&
-              Object.keys(x).includes('title') &&
-              Object.keys(x).includes('image') &&
-              Object.keys(x).includes('text')
-          )
-        }
+    data(): FeaturesData {
+      return {
+        app: initializeApp({
+          apiKey: this.$config.apiKey,
+          authDomain: this.$config.authDomain,
+          projectId: this.$config.projectId,
+          storageBucket: this.$config.storageBucket,
+          messagingSenderId: this.$config.messagingSenderId,
+          appId: this.$config.appId,
+          measurementId: this.$config.measurementId
+        }),
+        features: [],
+        about: ''
       }
+    },
+
+    computed: {
+      fireStore(): Firestore {
+        return getFirestore(this.app)
+      }
+    },
+
+    async mounted() {
+      const features = await getDocs(
+        collection(this.fireStore, 'features_cards')
+      )
+      features.forEach((doc) => {
+        this.features = [...this.features, { id: doc.id, ...doc.data() }]
+      })
+
+      const aboutDocs = await getDocs(collection(this.fireStore, 'about'))
+      aboutDocs.forEach((doc) => {
+        if (doc.data()['description']) {
+          this.about = doc.data()['description']
+        }
+      })
     }
   })
 </script>
