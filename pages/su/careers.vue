@@ -261,7 +261,7 @@
           )
           this.resetForm()
         } catch (e) {
-          this.$toast.error(e)
+          console.error(e)
         }
       }
     },
@@ -273,7 +273,7 @@
           this.jobs = [...this.jobs, { id: doc.id, ...doc.data() }]
         })
       } catch (e) {
-        this.$toast.error(e)
+        console.error(e)
       }
     }
   })

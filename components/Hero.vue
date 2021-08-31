@@ -6,12 +6,11 @@
       class="flex flex-col gap-10 h-full justify-evenly px-10 py-14 md:py-0 sm:pl-14 lg:pl-20 text-center md:text-left items-center md:items-start w-full md:w-3/5"
     >
       <div class="text-5xl md:text-6xl lg:text-7xl leading-snug">
-        We Provide Best IT Services
+        {{ title }}
       </div>
 
-      <div class="text-xl">
-        Mars brings the power of data science &amp; artificial intelligence to
-        every business
+      <div v-if="subtitle" class="text-xl">
+        {{ subtitle }}
       </div>
 
       <button
@@ -35,15 +34,72 @@
 
 <script lang="ts">
   import Vue from 'vue'
+  import { FirebaseApp, initializeApp } from '@firebase/app'
+  import {
+    collection,
+    Firestore,
+    getDocs,
+    getFirestore
+  } from '@firebase/firestore'
+
+  interface HomeHeroData {
+    app: FirebaseApp
+
+    id: string
+    title: string
+    subtitle: string
+  }
 
   export default Vue.extend({
     name: 'Hero',
+
+    data(): HomeHeroData {
+      return {
+        app: initializeApp({
+          apiKey: this.$config.apiKey,
+          authDomain: this.$config.authDomain,
+          projectId: this.$config.projectId,
+          storageBucket: this.$config.storageBucket,
+          messagingSenderId: this.$config.messagingSenderId,
+          appId: this.$config.appId,
+          measurementId: this.$config.measurementId
+        }),
+
+        id: '',
+        title: '',
+        subtitle: ''
+      }
+    },
+
+    computed: {
+      fireStore(): Firestore {
+        return getFirestore(this.app)
+      }
+    },
 
     methods: {
       next(): void {
         document
           .getElementById('services')
           ?.scrollIntoView({ behavior: 'smooth' })
+      }
+    },
+
+    async mounted() {
+      try {
+        const details = await getDocs(collection(this.fireStore, 'homepage'))
+
+        if (details.docs.length) {
+          const doc = details.docs[0]
+
+          this.id = doc.id
+          const data = doc.data()
+
+          this.title = data.title
+          this.subtitle = data.subtitle
+        }
+      } catch (e) {
+        console.error(e)
       }
     }
   })

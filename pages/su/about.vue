@@ -486,7 +486,7 @@
           this.$toast.success('Features updated!')
           this.resetForm()
         } catch (e) {
-          this.$toast.error(e)
+          console.error(e)
         }
       }
     },
@@ -520,7 +520,7 @@
           }
         })
       } catch (e) {
-        this.$toast.error(e)
+        console.error(e)
       }
     }
   })

@@ -427,7 +427,7 @@
           )
           this.resetTrainingForm()
         } catch (e) {
-          this.$toast.error(e)
+          console.error(e)
         }
       },
 
@@ -477,7 +477,7 @@
           )
           this.resetSlideForm()
         } catch (e) {
-          this.$toast.error(e)
+          console.error(e)
         }
       }
     },
@@ -496,7 +496,7 @@
           this.slides = [...this.slides, { id: doc.id, ...doc.data() }]
         })
       } catch (e) {
-        this.$toast.error(e)
+        console.error(e)
       }
     }
   })

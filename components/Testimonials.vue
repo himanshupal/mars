@@ -23,7 +23,7 @@
           class="flex flex-col py-6 md:py-0 md:pl-8 w-4/5 md:w-3/5 text-center md:text-left"
         >
           <div class="text-xs sm:text-sm font-light pb-3">
-            {{ slide.text }}
+            {{ slide.review }}
           </div>
           <div class="font-semibold text-2xl">{{ slide.name }}</div>
           <div class="font-thin text-sm">{{ slide.about }}</div>
@@ -55,7 +55,7 @@
           return v.every(
             (x) =>
               typeof x === 'object' &&
-              Object.keys(x).includes('text') &&
+              Object.keys(x).includes('review') &&
               Object.keys(x).includes('name') &&
               Object.keys(x).includes('about') &&
               Object.keys(x).includes('image')

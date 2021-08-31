@@ -39,8 +39,8 @@
 
       <Testimonials
         class="lg:hidden"
-        :title="testimonials.title"
-        :slides="testimonials.list"
+        title="Student Testimonials"
+        :slides="testimonials"
       />
 
       <div class="flex flex-col w-full sm:w-2/3 lg:w-1/3">
@@ -192,9 +192,10 @@
     </div>
 
     <Testimonials
+      v-if="testimonials.length"
       class="pb-12 hidden lg:block"
       :title="testimonials.title"
-      :slides="testimonials.list"
+      :slides="testimonials"
     />
   </div>
 </template>
@@ -216,6 +217,7 @@
 
     app: FirebaseApp
 
+    testimonials: Array<Record<string, string>>
     trainingSelected: boolean
     mobileError: string
     mediumError: string
@@ -241,6 +243,7 @@
         slides: [],
         trainings: [],
 
+        testimonials: [],
         trainingSelected: false,
         mobileError: '',
         mediumError: '',
@@ -302,9 +305,6 @@
     },
 
     computed: {
-      testimonials(): Object {
-        return this.$store.state.testimonials.students
-      },
       fireStore(): Firestore {
         return getFirestore(this.app)
       }
@@ -323,9 +323,19 @@
         slides.forEach((doc) => {
           this.slides = [...this.slides, { id: doc.id, ...doc.data() }]
         })
+
+        const studentTestimonials = await getDocs(
+          collection(this.fireStore, 'testimonials_student')
+        )
+
+        studentTestimonials.forEach((doc) => {
+          this.testimonials = [
+            ...this.testimonials,
+            { id: doc.id, ...doc.data() }
+          ]
+        })
       } catch (e) {
-        // @ts-ignore
-        this.$toast.error(e)
+        console.error(e)
       }
     }
   })

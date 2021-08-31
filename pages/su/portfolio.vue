@@ -298,7 +298,7 @@
           )
           this.resetForm()
         } catch (e) {
-          this.$toast.error(e)
+          console.error(e)
         }
       }
     },
@@ -310,7 +310,7 @@
           this.projects = [...this.projects, { id: doc.id, ...doc.data() }]
         })
       } catch (e) {
-        this.$toast.error(e)
+        console.error(e)
       }
     }
   })
