@@ -162,12 +162,38 @@
               v-model.trim="message"
             />
 
+            <label class="block py-2" for="cv">
+              Resume / CV
+            </label>
+            <input
+              ref="cv"
+              type="file"
+              hidden
+              accept="image/jpeg,image/png,application/pdf,application/msword"
+              @change="imageSelect"
+            />
+            <input
+              class="order-r-8 w-full h-9 py-2 px-3 rounded-sm text-gray-900 cursor-pointer"
+              :class="{ 'text-center': !cvName }"
+              readonly
+              name="cv"
+              @click="$refs.cv.click()"
+              placeholder="Upload Resume"
+              :value="cvName"
+            />
+
             <button
               type="submit"
               class="mt-7 mb-5 py-1.5 px-6 border-2 rounded-sm w-full hover:bg-white hover:text-gray-800 transition-all text-lg focus-within:bg-white focus-within:text-gray-800 font-semibold"
             >
               Submit
             </button>
+
+            <div v-if="submissionId" class="text-xs text-center">
+              Your application has been submitted.
+              <br />
+              <code>{{ this.submissionId }}</code>
+            </div>
           </form>
         </div>
       </div>
@@ -180,12 +206,19 @@
   import validation from '@/mixins/validation'
   import computed from '@/mixins/computed'
   import {
+    addDoc,
     collection,
     Firestore,
     getDocs,
     getFirestore
   } from '@firebase/firestore'
   import { FirebaseApp, initializeApp } from '@firebase/app'
+  import {
+    ref,
+    getStorage,
+    FirebaseStorage,
+    uploadBytes
+  } from '@firebase/storage'
 
   interface CareerData {
     jobs: Array<Record<string, string>>
@@ -201,6 +234,11 @@
     position: string
     experience: number
     message: string
+
+    cvName: string
+    cv: Blob | ArrayBuffer | Uint8Array
+
+    submissionId: string
   }
 
   export default Vue.extend({
@@ -232,7 +270,12 @@
         location: '',
         position: '',
         experience: 0,
-        message: ''
+        message: '',
+
+        cvName: '',
+        cv: new ArrayBuffer(0),
+
+        submissionId: ''
       }
     },
 
@@ -243,6 +286,9 @@
       },
       fireStore(): Firestore {
         return getFirestore(this.app)
+      },
+      storage(): FirebaseStorage {
+        return getStorage(this.app)
       }
     },
 
@@ -257,21 +303,58 @@
         return false
       },
 
-      submitForm(): void {
-        console.log({
-          name: this.name,
-          email: this.email,
-          mobile: this.mobile,
-          location: this.location,
-          position: this.position,
-          experience: this.experience,
-          message: this.message
-        })
+      imageSelect(e: any) {
+        if (e.target.files.length) {
+          const [file] = e.target.files
+
+          this.cvName = file.name
+          this.cv = file
+        }
+      },
+
+      async submitForm(): Promise<void> {
+        this.$toast.info('Please wait...')
+
+        const storagePath = `job_applications/${this.cvName}`
+
+        try {
+          const { metadata } = await uploadBytes(
+            ref(this.storage, storagePath),
+            this.cv
+          )
+
+          const { id } = await addDoc(
+            collection(this.fireStore, 'job_applications'),
+            {
+              name: this.name,
+              email: this.email,
+              mobile: this.mobile,
+              location: this.location,
+              position: this.position,
+              experience: this.experience,
+              message: this.message,
+              cv: metadata.fullPath,
+              appliedAt: Date.now()
+            }
+          )
+
+          this.submissionId = id
+
+          this.name = ''
+          this.email = ''
+          this.mobile = ''
+          this.location = ''
+          this.position = ''
+          this.experience = 0
+          this.message = ''
+        } catch (e) {
+          console.error(e)
+        }
       },
 
       focusForm(job: number): void {
         this.jobSelected = true
-        // @ts-ignore
+
         this.position = this.jobs[job].title
 
         const form = this.$refs?.form as HTMLElement
@@ -291,8 +374,7 @@
           this.jobs = [...this.jobs, { id: doc.id, ...doc.data() }]
         })
       } catch (e) {
-        // @ts-ignore
-        this.$toast.error(e)
+        console.error(e)
       }
     }
   })
