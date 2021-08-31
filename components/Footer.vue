@@ -87,14 +87,33 @@
 <script lang="ts">
   import Vue from 'vue'
   import validation from '@/mixins/validation'
+  import { FirebaseApp, initializeApp } from '@firebase/app'
+  import { addDoc, collection, getFirestore } from '@firebase/firestore'
+
+  interface FooterData {
+    app: FirebaseApp
+    email: string
+
+    socials: Array<Record<string, string>>
+  }
 
   export default Vue.extend({
     name: 'Footer',
 
     mixins: [validation],
 
-    data() {
+    data(): FooterData {
       return {
+        app: initializeApp({
+          apiKey: this.$config.apiKey,
+          authDomain: this.$config.authDomain,
+          projectId: this.$config.projectId,
+          storageBucket: this.$config.storageBucket,
+          messagingSenderId: this.$config.messagingSenderId,
+          appId: this.$config.appId,
+          measurementId: this.$config.measurementId
+        }),
+
         email: '',
 
         socials: [
@@ -119,8 +138,22 @@
     },
 
     methods: {
-      submitForm() {
-        console.log(this.email)
+      async submitForm() {
+        try {
+          const { id } = await addDoc(
+            collection(getFirestore(this.app), 'subscriptions'),
+            {
+              email: this.email,
+              savedAt: Date.now()
+            }
+          )
+
+          this.$toast.success('Thanks for subscribing.')
+
+          this.email = ''
+        } catch (e) {
+          console.error(e)
+        }
       }
     }
   })
