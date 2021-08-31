@@ -61,15 +61,53 @@
 
       <div class="flex sm:flex-col gap-3 justify-center">
         <a
-          v-for="(media, index) in socials"
-          :href="`https://${media.url}`"
+          v-if="$store.state.socials.facebook"
+          :href="$store.state.socials.facebook"
           target="_blank"
-          :key="`social-${index}`"
           rel="noopener noreferrer"
         >
           <img
             class="w-6 h-6 object-contain"
-            :src="require(`@/assets/icons/${media.icon}.svg`)"
+            :src="require(`@/assets/icons/facebook.svg`)"
+            alt="Icon"
+          />
+        </a>
+
+        <a
+          v-if="$store.state.socials.instagram"
+          :href="$store.state.socials.instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="w-6 h-6 object-contain"
+            :src="require(`@/assets/icons/instagram.svg`)"
+            alt="Icon"
+          />
+        </a>
+
+        <a
+          v-if="$store.state.socials.linkedIn"
+          :href="$store.state.socials.linkedIn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="w-6 h-6 object-contain"
+            :src="require(`@/assets/icons/linkedin.svg`)"
+            alt="Icon"
+          />
+        </a>
+
+        <a
+          v-if="$store.state.socials.whatsApp"
+          :href="'https://wa.me/+91' + $store.state.socials.whatsApp"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="w-6 h-6 object-contain"
+            :src="require(`@/assets/icons/whatsapp.svg`)"
             alt="Icon"
           />
         </a>
@@ -88,13 +126,17 @@
   import Vue from 'vue'
   import validation from '@/mixins/validation'
   import { FirebaseApp, initializeApp } from '@firebase/app'
-  import { addDoc, collection, getFirestore } from '@firebase/firestore'
+  import {
+    addDoc,
+    collection,
+    Firestore,
+    getDocs,
+    getFirestore
+  } from '@firebase/firestore'
 
   interface FooterData {
     app: FirebaseApp
     email: string
-
-    socials: Array<Record<string, string>>
   }
 
   export default Vue.extend({
@@ -114,26 +156,13 @@
           measurementId: this.$config.measurementId
         }),
 
-        email: '',
+        email: ''
+      }
+    },
 
-        socials: [
-          {
-            url: 'facebook.com/facebook',
-            icon: 'facebook'
-          },
-          {
-            url: 'instagram.com/instagram',
-            icon: 'instagram'
-          },
-          {
-            url: 'linkedin.com/company/linkedin',
-            icon: 'linkedin'
-          },
-          {
-            url: 'wa.me/919876543210',
-            icon: 'whatsapp'
-          }
-        ]
+    computed: {
+      fireStore(): Firestore {
+        return getFirestore(this.app)
       }
     },
 
@@ -141,7 +170,7 @@
       async submitForm() {
         try {
           const { id } = await addDoc(
-            collection(getFirestore(this.app), 'subscriptions'),
+            collection(this.fireStore, 'subscriptions'),
             {
               email: this.email,
               savedAt: Date.now()
@@ -154,6 +183,23 @@
         } catch (e) {
           console.error(e)
         }
+      }
+    },
+
+    async mounted() {
+      try {
+        if (!this.$store.state.socials.email) {
+          const socials = await getDocs(collection(this.fireStore, 'socials'))
+
+          if (socials.docs.length) {
+            await this.$store.dispatch(
+              'socials/saveSocials',
+              socials.docs[0].data()
+            )
+          }
+        }
+      } catch (e) {
+        console.error(e)
       }
     }
   })

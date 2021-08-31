@@ -77,10 +77,14 @@
         Submit
       </button>
 
-      <div class="text-center text-sm pb-2">
+      <div v-if="$store.state.socials.email" class="text-center text-sm pb-2">
         or you may contact us at
-        <a href="mailto:desk@marsit.org" class="outline-none font-semibold">
-          desk@marsit.org
+        <a
+          :href="'mailto:' + $store.state.socials.email"
+          class="outline-none font-semibold"
+          target="_blank"
+        >
+          {{ $store.state.socials.email }}
         </a>
       </div>
     </form>
