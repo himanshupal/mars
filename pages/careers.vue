@@ -338,6 +338,7 @@
             }
           )
 
+          this.$toast.success('Application Sent!')
           this.submissionId = id
 
           this.name = ''

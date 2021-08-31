@@ -255,7 +255,7 @@
   } from 'firebase/firestore'
   import { FirebaseApp, initializeApp } from '@firebase/app'
 
-  interface AdminPortfolioData {
+  interface AdminTrainingsData {
     trainings: Array<Record<string, string>>
     slides: Array<Record<string, string>>
     app: FirebaseApp
@@ -277,7 +277,7 @@
 
     layout: 'admin',
 
-    data(): AdminPortfolioData {
+    data(): AdminTrainingsData {
       return {
         app: initializeApp({
           apiKey: this.$config.apiKey,

@@ -121,7 +121,7 @@
   }
 
   export default Vue.extend({
-    name: 'AdminPortfolio',
+    name: 'AdminJobApplications',
 
     layout: 'admin',
 

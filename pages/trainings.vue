@@ -125,7 +125,7 @@
             required
             @keypress="charsOnly"
             placeholder="Name of your college"
-            v-model.trim="location"
+            v-model.trim="college"
           />
 
           <label class="block py-2" for="medium">
@@ -188,6 +188,12 @@
             Submit
           </button>
         </form>
+
+        <div v-if="submissionId" class="text-xs text-center">
+          Your request has been saved.
+          <br />
+          <code>{{ this.submissionId }}</code>
+        </div>
       </div>
     </div>
 
@@ -205,6 +211,7 @@
   import validation from '@/mixins/validation'
   import { FirebaseApp, initializeApp } from '@firebase/app'
   import {
+    addDoc,
     collection,
     Firestore,
     getDocs,
@@ -226,11 +233,13 @@
     email: string
     mobile: string
     location: string
-    message: string
+    // message: string
     course: string
     medium: string
     college: string
     enquiryFor: string
+
+    submissionId: string
   }
 
   export default Vue.extend({
@@ -252,11 +261,13 @@
         email: '',
         mobile: '',
         location: '',
-        message: '',
+        // message: '',
         course: '',
         medium: '-1',
         college: '',
         enquiryFor: '',
+
+        submissionId: '',
 
         app: initializeApp({
           apiKey: this.$config.apiKey,
@@ -271,23 +282,43 @@
     },
 
     methods: {
-      submitForm(): void {
-        console.log({
-          name: this.name,
-          email: this.email,
-          mobile: this.mobile,
-          location: this.location,
-          message: this.message,
-          course: this.course,
-          medium: this.medium,
-          college: this.college,
-          enquiryFor: this.enquiryFor
-        })
+      async submitForm(): Promise<void> {
+        try {
+          const { id } = await addDoc(
+            collection(this.fireStore, 'requests_training'),
+            {
+              name: this.name,
+              email: this.email,
+              mobile: this.mobile,
+              location: this.location,
+              // message: this.message,
+              course: this.course,
+              medium: this.medium,
+              college: this.college,
+              enquiryFor: this.enquiryFor,
+              enquiryAt: Date.now()
+            }
+          )
+
+          this.$toast.success('Enquiry Sent!')
+          this.submissionId = id
+
+          this.name = ''
+          this.email = ''
+          this.mobile = ''
+          this.location = ''
+          // this.message = ''
+          this.course = ''
+          this.medium = '-1'
+          this.college = ''
+          this.enquiryFor = ''
+        } catch (e) {
+          console.error(e)
+        }
       },
       focusForm(training: number): void {
         this.trainingSelected = true
-        // @ts-ignore
-        this.form.enquiryFor = this.trainings.list[training].title
+        this.enquiryFor = this.trainings[training].title
         const form = this.$refs?.form as HTMLElement
         form.focus()
       },

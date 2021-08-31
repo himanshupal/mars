@@ -14,7 +14,7 @@
         required
         @keypress="alphaOnly"
         placeholder="John Doe"
-        v-model.trim="form.name"
+        v-model.trim="name"
       />
 
       <label class="block py-2" for="email">
@@ -27,7 +27,7 @@
         required
         @keypress="emailCharsOnly"
         placeholder="johndoe@email.com"
-        v-model.trim="form.email"
+        v-model.trim="email"
       />
 
       <label class="block py-2" for="mobile">
@@ -42,7 +42,7 @@
         @blur="validateContact"
         @keypress="numericOnly"
         placeholder="+XX-XXX-XXX-XXXX"
-        v-model.trim="form.mobile"
+        v-model.trim="mobile"
       />
       <span class="text-xs text-yellow-300 pt-1 max-w-xs">
         {{ mobileError }}
@@ -56,7 +56,7 @@
         required
         @keypress="charsOnly"
         placeholder="New Delhi, India"
-        v-model.trim="form.location"
+        v-model.trim="location"
       />
 
       <label class="block py-2" for="subject">
@@ -67,7 +67,7 @@
         name="subject"
         rows="3"
         placeholder="Write your query in detail here..."
-        v-model.trim="form.message"
+        v-model.trim="message"
       />
 
       <button
@@ -91,39 +91,76 @@
   import Vue from 'vue'
   import validation from '@/mixins/validation'
   import { Contact } from '@/models/Contact'
+  import { initializeApp } from '@firebase/app'
+  import {
+    addDoc,
+    collection,
+    Firestore,
+    getFirestore
+  } from '@firebase/firestore'
 
   export default Vue.extend({
     name: 'ContactPage',
 
     data(): Contact {
       return {
+        app: initializeApp({
+          apiKey: this.$config.apiKey,
+          authDomain: this.$config.authDomain,
+          projectId: this.$config.projectId,
+          storageBucket: this.$config.storageBucket,
+          messagingSenderId: this.$config.messagingSenderId,
+          appId: this.$config.appId,
+          measurementId: this.$config.measurementId
+        }),
+
         mobileError: '',
 
-        form: {
-          name: '',
-          email: '',
-          mobile: '',
-          location: '',
-          message: ''
-        }
+        name: '',
+        email: '',
+        mobile: '',
+        location: '',
+        message: ''
+      }
+    },
+
+    computed: {
+      fireStore(): Firestore {
+        return getFirestore(this.app)
       }
     },
 
     mixins: [validation],
 
     methods: {
-      submitForm(): void {
-        console.log({
-          name: this.form.name,
-          email: this.form.email,
-          mobile: this.form.mobile,
-          location: this.form.location,
-          message: this.form.message
-        })
+      async submitForm(): Promise<void> {
+        try {
+          const { id } = await addDoc(
+            collection(this.fireStore, 'requests_contact'),
+            {
+              name: this.name,
+              email: this.email,
+              mobile: this.mobile,
+              location: this.location,
+              message: this.message,
+              requestAt: Date.now()
+            }
+          )
+
+          this.$toast.success('Request Sent!')
+
+          this.name = ''
+          this.email = ''
+          this.mobile = ''
+          this.location = ''
+          this.message = ''
+        } catch (e) {
+          console.error(e)
+        }
       },
 
       validateContact(e: InputEvent) {
-        if (/([6-9][\d]{9})+/.test(this.form.mobile)) this.mobileError = ''
+        if (/([6-9][\d]{9})+/.test(this.mobile)) this.mobileError = ''
         else this.mobileError = 'First digit of mobile must be between 6 & 9'
       }
     }
